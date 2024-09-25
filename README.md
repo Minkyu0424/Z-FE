@@ -1,36 +1,28 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Z - 트위터(X) 클론 웹 서비스
 
-## Getting Started
+**Z**는 트위터(X)와 유사한 기능을 제공하는 클론 웹 서비스입니다.
 
-First, run the development server:
+## 주요 기능
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **사용자 인증**
+  - 회원가입, 로그인, 로그아웃 기능 (kakao login).
+- **게시글 작성**
+  - 자신만의 사진과 글을 조합해 게시글을 작성할 수 있습니다.
+- **타임라인 피드**
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+  - 팔로우한 사용자의 게시글을 실시간으로 볼 수 있습니다.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **팔로우/언팔로우**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+  - 다른 사용자를 팔로우하고 그들의 게시글을 확인할 수 있습니다.
 
-## Learn More
+- **좋아요 및 리트윗**
 
-To learn more about Next.js, take a look at the following resources:
+  - 게시글에 좋아요를 누르거나 리트윗할 수 있습니다.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **실시간 알림**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+  - 멘션, 댓글, 좋아요 등의 알림을 실시간으로 받을 수 있습니다. (WebSocket 사용)
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **반응형 디자인**
+  - 데스크탑 및 모바일 환경에 최적화된 UI.
