@@ -29,43 +29,45 @@ const LoginGetNicknameTag: React.FC = () => {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <div className="flex justify-center items-center mb-6">
+        <div className="flex justify-center items-center ">
           <Image
             src="/logo_Z.jpg"
             alt="Logo"
-            width={50}
-            height={50}
-            className="mr-2"
+            width={100}
+            height={100}
+            //className="mr-2"
           />
+        </div>
+        <div className="flex justify-center items-start">          
           <h2 className="text-xl font-semibold">회원가입</h2>
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">생년월일</label>
+            <label className="block font-medium text-gray-700 mb-1">생년월일</label>
             <div className="flex gap-2">
               <input
-                type="text"
+                type="string"
                 name="year"
                 placeholder="YYYY"
                 value={formData.year}
                 onChange={handleChange}
-                className="flex-1 p-2 border rounded"
+                className=" w-1/3 p-2 border rounded"
               />
               <input
-                type="text"
+                type="string"
                 name="month"
                 placeholder="MM"
                 value={formData.month}
                 onChange={handleChange}
-                className="flex-1 p-2 border rounded"
+                className="w-1/3 p-2 border rounded"
               />
               <input
-                type="text"
+                type="string"
                 name="day"
                 placeholder="DD"
                 value={formData.day}
                 onChange={handleChange}
-                className="flex-1 p-2 border rounded"
+                className="w-1/3 p-2 border rounded"
               />
             </div>
             <p className="text-xs text-gray-500 mt-1">연, 월, 일을 모두 기입해주세요</p>
@@ -73,7 +75,8 @@ const LoginGetNicknameTag: React.FC = () => {
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">닉네임</label>
             <input
-              type="text"
+              type="string"
+              
               name="nickname"
               placeholder="제트핑"
               value={formData.nickname}
@@ -87,7 +90,7 @@ const LoginGetNicknameTag: React.FC = () => {
             <div className="relative">
               <span className="absolute inset-y-0 left-0 flex items-center pl-2 text-gray-500">@</span>
               <input
-                type="text"////타입 수정해야함
+                type="string"
                 name="tag"
                 placeholder="abc1234"
                 value={formData.tag}
