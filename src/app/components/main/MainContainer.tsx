@@ -1,5 +1,5 @@
 const MainContainer = () => {
-  return <div>메인내용을 포함</div>;
+  return <div className="w-12 h-12 flex bg-red-700">메인내용을 포함</div>;
 };
 
 export default MainContainer;

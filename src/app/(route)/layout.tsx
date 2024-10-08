@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
-import "../styles/globals.css";
+import type { Metadata } from 'next';
+import '../styles/globals.css';
 
 export const metadata: Metadata = {
-  title: "Z",
-  description: "Z replace X, start Z!",
+  title: 'Z',
+  description: 'Z replace X, start Z!',
 };
 
 export default function RootLayout({
@@ -13,7 +13,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body>{children}</body>
+      <body className="w-full h-full">{children}</body>
     </html>
   );
 }
