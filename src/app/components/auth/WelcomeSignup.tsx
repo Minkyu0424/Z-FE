@@ -14,7 +14,7 @@ const WelcomeSignup: React.FC<WelcomeComponentProps> = ({nickname}) => {
             alt="Logo"
             width={100}
             height={100}
-            //className="mr-2"
+            
           />
           </div>
       <h1 className="text-2xl font-bold mb-8">회원가입 완료!</h1>
@@ -24,7 +24,7 @@ const WelcomeSignup: React.FC<WelcomeComponentProps> = ({nickname}) => {
             alt="Logo"
             width={60}
             height={60}
-            //className="mr-2"
+          
           />
       <p className="text-center mb-15 gap-15">
         {nickname}님 반가워요!<br />

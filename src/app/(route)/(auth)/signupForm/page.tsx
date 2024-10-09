@@ -1,9 +1,8 @@
 import LoginGetNicknameTag from "@/app/components/auth/LoginGetNicknameTag";
 const signUp = () =>{
     return(
-        <div>
-            <LoginGetNicknameTag/>
-        </div>
+         <LoginGetNicknameTag/>
     );
 }
+
 export default signUp;

@@ -35,7 +35,7 @@ const LoginGetNicknameTag: React.FC = () => {
             alt="Logo"
             width={100}
             height={100}
-            //className="mr-2"
+           
           />
         </div>
         <div className="flex justify-center items-start">          
