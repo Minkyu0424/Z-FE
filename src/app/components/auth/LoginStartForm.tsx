@@ -5,14 +5,11 @@ import Image from 'next/image';
 
 
 
-// const client_id = process.env.KAKAO_CLIENT_ID ;
-// const redirect_uri = process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI || '';
-// const response_type = process.env.KAKAO_RESPONSE_TYPE || 'code';
+const client_id = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID || '';
+const redirect_uri = process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI || '';
+const response_type = process.env.KAKAO_RESPONSE_TYPE || 'code';
 
-//위 코드로 실행해봤는데 실행이 안돔 env에 오류 나는 것 같은데 못잡음
-const client_id = "7635d167a2de62a2bd1929ca902ffbec"
-const redirect_uri ="http://localhost:3000/login"
-const response_type ="code"
+
 
 const LoginStartForm: React.FC = () => {
     const handleKakaoLogin = () => {
