@@ -1,8 +1,10 @@
+import SideBar from '../components/common/layouts/SideBar';
 import MainContainer from '../components/main/MainContainer';
 
 export default function Home() {
   return (
-    <div className="w-full h-full flex items-center justify-center text-3xl">
+    <div className="flex bg-white w-[480px]">
+      <SideBar />
       <MainContainer />
     </div>
   );
