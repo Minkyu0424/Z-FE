@@ -1,9 +1,6 @@
-const getColoredIcon = (icon: IconPathTypes, color: string) => {
+export const getColoredIcon = (icon: IconPathTypes, color: string) => {
   return {
     ...icon,
-    options: {
-      ...icon.options,
-      stroke: color,
-    },
+    fill: color,
   };
 };
