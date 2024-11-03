@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className={`${pretendard.variable} min-h-screen min-w-[800px] mx-auto font-pretendard`}>
+    <html lang="ko" className={`${pretendard.variable} min-h-screen min-w-[640px] mx-auto font-pretendard`}>
       <body className="w-full h-full">{children}</body>
     </html>
   );
