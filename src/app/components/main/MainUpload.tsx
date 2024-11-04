@@ -1,92 +1,72 @@
 'use client';
 
+import { imageIcon } from '@/app/constants/iconPath';
+import { MAIN_POST_PLACEHOLDER } from '@/app/constants/main';
 import Image from 'next/image';
 import { useRef, useState } from 'react';
-
-interface Upload {
-  type: 'image';
-  file: File;
-  preview: string;
-}
+import Button from '../common/ui/Button';
+import Icons from '../common/ui/Icons';
+import MainImages from './MainImages';
 
 const MainUpload = () => {
   const contentInputRef = useRef<HTMLTextAreaElement | null>(null);
-  const [uploads, setUploads] = useState<Upload[]>([]);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const [files, setFiles] = useState<ImageFileTypes[]>([]);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
+    if (file && files.length < 4) {
       const imageUrl = URL.createObjectURL(file);
-      setUploads((prev) => [...prev, { type: 'image', file, preview: imageUrl }]);
-      e.target.value = ''; // 파일 입력 초기화
+      setFiles((prev) => [...prev, { type: 'image', file, preview: imageUrl }]);
+      e.target.value = '';
+    } else {
+      alert('사진은 최대 4개까지 업로드 가능합니다.');
     }
+  };
+
+  const handleIconClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleResize = () => {
+    if (contentInputRef.current) {
+      contentInputRef.current.style.height = 'auto';
+      contentInputRef.current.style.height = `${contentInputRef.current.scrollHeight}px`;
+    }
+  };
+
+  const handleDeleteImage = (index: number) => {
+    setFiles((prev) => prev.filter((_, i) => i !== index));
   };
 
   const handleSubmit = async () => {
     const textContent = contentInputRef.current?.value.trim();
-    if (!textContent && uploads.length === 0) {
+    if (!textContent && files.length === 0) {
       return;
-    }
-    const formData = new FormData();
-    if (textContent) {
-      formData.append('textContent', textContent);
-    }
-    uploads.forEach((upload, index) => {
-      if (upload.type === 'image') {
-        formData.append(`image[${index}]`, upload.file);
-      }
-    });
-    try {
-      const response = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData,
-      });
-      const result = await response.json();
-      console.log('Upload successful:', result);
-    } catch (error) {
-      console.error('Error uploading:', error);
     }
     if (contentInputRef.current) {
       contentInputRef.current.value = '';
     }
-    setUploads([]);
   };
 
   return (
-    <div className="flex flex-col border-b-colors-main-1 border-b px-3">
-      <div className="flex items-start mb-4">
-        <Image className="w-8 h-8 relative mr-3" src="/mock/profile1" alt="profile" />
-      </div>
-      <div className="flex items-center max-h-[800px] overflow-y-auto">
+    <div className="flex flex-col border-b-colors-main-2 border-b px-3 pb-2.5">
+      <div className="flex gap-x-2.5">
+        <div className="w-8 h-8 relative">
+          <Image className="w-8 h-8 relative mr-3" src="/mock/profile1.png" alt="profile" fill />
+        </div>
         <textarea
           ref={contentInputRef}
-          placeholder="내용을 입력하세요..."
-          className="border border-gray-300 rounded px-2 py-1 flex-1 mr-2 h-24 resize-none"
-        />
-        <button onClick={handleSubmit} className="px-3 py-1 bg-blue-500 text-white rounded">
-          제출
-        </button>
-      </div>
-
-      {/* Image Input */}
-      <div className="mb-4">
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleImageChange}
-          className="border border-gray-300 rounded px-2 py-1"
+          placeholder={MAIN_POST_PLACEHOLDER}
+          onInput={handleResize}
+          className="flex outline-none resize-none w-[340px] p-2 "
         />
       </div>
-
-      {/* Uploaded Images Preview */}
-      <div className="flex flex-wrap mt-4">
-        {uploads.map((upload, index) => (
-          <div key={index} className="flex-1">
-            {upload.type === 'image' && (
-              <img src={upload.preview} alt="미리보기 이미지" className="flex-1 h-60 object-cover rounded" />
-            )}
-          </div>
-        ))}
+      <input type="file" accept="image/*" onChange={handleImageChange} ref={fileInputRef} className="hidden" />
+      {files.length !== 0 && <MainImages uploads={files} handleDeleteImage={handleDeleteImage} />}
+      <div className="flex pl-12 mt-2.5 w-full justify-between pr-4 border-t border-b-colors-main-2 pt-2.5">
+        <Icons name={imageIcon} onClick={handleIconClick} className="cursor-pointer" />
+        <Button buttonText="POST" type="post" onClickHandler={handleSubmit} />
       </div>
     </div>
   );
