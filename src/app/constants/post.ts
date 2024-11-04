@@ -1,0 +1,1 @@
+export const POST_COMMENT_PLACEHOLDER = '댓글을 남겨보세요'

@@ -7,5 +7,5 @@ export const BUTTON_STYLE = {
 
 export const INPUT_STYLE = {
   default: (className: string) => `w-full ${className}`,
-  comment: (className: string) => `w-[255px] pl-2.5 h-10 text-sm outline-none ${className}`,
+  comment: (className: string) => `w-[255px] h-10 text-sm outline-none ${className}`,
 } as const;
