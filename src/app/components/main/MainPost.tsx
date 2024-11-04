@@ -1,4 +1,4 @@
-import { dotIcon } from '@/app/constants/iconPath';
+import { commentIcon, dotIcon, postLikeIcon, repostIcon } from '@/app/constants/iconPath';
 import Image from 'next/image';
 import Icons from '../common/ui/Icons';
 
@@ -27,9 +27,23 @@ const MainPost = ({ post }: MainPostProps) => {
         <div className="w-full flew-wrap flex gap-2">
           {post.files.map((file, i) => (
             <div key={i} className={`relative ${post.files.length === 1 ? 'w-full' : 'w-1/2'}`}>
-              <img src={file} alt={`file-${i}`} className='flex-1 rounded-xl' />
+              <img src={file} alt={`file-${i}`} className="flex-1 rounded-xl" />
             </div>
           ))}
+        </div>
+        <div className="flex pl-2.5 gap-x-5 text-xs">
+          <div className="flex gap-x-1 items-center cursor-pointer">
+            <Icons name={postLikeIcon} />
+            <p>{post.totalLikes}</p>
+          </div>
+          <div className="flex gap-x-1 items-center cursor-pointer">
+            <Icons name={repostIcon} />
+            <p>{post.totalLikes}</p>
+          </div>
+          <div className="flex gap-x-1 items-center cursor-pointer">
+            <Icons name={commentIcon} />
+            <p>{post.totalComment}</p>
+          </div>
         </div>
       </div>
     </div>
