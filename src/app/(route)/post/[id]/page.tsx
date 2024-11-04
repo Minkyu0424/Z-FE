@@ -15,7 +15,7 @@ export default async function PostDetailPage({ params }: Props) {
   return (
     <div className="flex bg-white w-[480px]">
       <SideBar />
-      <div className="flex-1 flex flex-col gap-y-5">
+      <div className="flex-1 flex flex-col h-screen gap-y-5 overflow-y-auto">
         <PostDetail post={mockPosts[2]} />
         <CommentContainer />
       </div>
