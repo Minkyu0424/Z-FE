@@ -50,7 +50,7 @@ const MainUpload = () => {
   };
 
   return (
-    <div className="flex flex-col border-b-colors-main-2 border-b px-3 pb-2.5">
+    <div className="flex flex-col border-b-main-2 border-b px-3 pb-2.5">
       <div className="flex gap-x-2.5">
         <div className="w-8 h-8 relative">
           <Image className="w-8 h-8 relative mr-3" src="/mock/profile1.png" alt="profile" fill />
@@ -64,7 +64,7 @@ const MainUpload = () => {
       </div>
       <input type="file" accept="image/*" onChange={handleImageChange} ref={fileInputRef} className="hidden" />
       {files.length !== 0 && <MainImages uploads={files} handleDeleteImage={handleDeleteImage} />}
-      <div className="flex pl-12 mt-2.5 w-full justify-between pr-4 border-t border-b-colors-main-2 pt-2.5">
+      <div className="flex pl-12 mt-2.5 w-full justify-between pr-4 border-t border-b-main-2 pt-2.5">
         <Icons name={imageIcon} onClick={handleIconClick} className="cursor-pointer" />
         <Button buttonText="POST" type="post" onClickHandler={handleSubmit} />
       </div>

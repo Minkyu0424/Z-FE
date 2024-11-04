@@ -24,7 +24,7 @@ const PostDetail = ({ post }: PostDetailProps) => {
         </div>
         <div className="text-sm">
           <p className="text-black font-semibold mb-0.5">{post.nickname}</p>
-          <p className="text-xs text-colors-main-1">@{post.userId}</p>
+          <p className="text-xs text-main-1">@{post.userId}</p>
         </div>
       </div>
       <div className="w-full flex flex-col gap-y-2 px-2.5 text-[14px] pt-2">
@@ -38,12 +38,12 @@ const PostDetail = ({ post }: PostDetailProps) => {
           </div>
         ))}
       </div>
-      <div className="flex text-sm items-center gap-2 text-colors-main-1">
+      <div className="flex text-sm items-center gap-2 text-main-1">
         <p>{post.createdAt}</p>
         <Icons name={dotIcon} />
         <p className="font-semibold">24M</p>
       </div>
-      <div className="flex gap-x-5 border-y border-colors-main-2 py-2 text-sm font-medium mt-3 pl-2.5">
+      <div className="flex gap-x-5 border-y border-main-2 py-2 text-sm font-medium mt-3 pl-2.5">
         <div className="flex gap-x-1 items-center cursor-pointer">
           <Icons name={postLikeIcon} />
           <p>{post.totalLikes}</p>

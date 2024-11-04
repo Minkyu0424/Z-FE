@@ -14,7 +14,7 @@ const MainPost = ({ post }: MainPostProps) => {
         <Image src={post.profile} alt="프로필" fill />
       </div>
       <div className="w-full flex flex-col gap-y-2 px-2.5 text-[14px]">
-        <div className="flex items-center gap-x-1 text-colors-main-1">
+        <div className="flex items-center gap-x-1 text-main-1">
           <p className="text-black font-semibold">{post.nickname}</p>
           <p>@{post.userId}</p>
           <Icons name={dotIcon} />
