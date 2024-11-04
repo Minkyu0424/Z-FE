@@ -1,9 +1,11 @@
 'use client';
 
 import { backIcon, commentIcon, dotIcon, postLikeIcon, repostIcon } from '@/app/constants/iconPath';
+import { useModal } from '@/app/hooks/useModal';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import Icons from '../common/ui/Icons';
+import RepostModal from './RepostModal';
 
 interface PostDetailProps {
   post: PostTypes;
@@ -11,9 +13,11 @@ interface PostDetailProps {
 
 const PostDetail = ({ post }: PostDetailProps) => {
   const router = useRouter();
+  const { isOpen, openModal, closeModal } = useModal(false);
 
   return (
-    <div className="w-full flex flex-col px-3 pt-4">
+    <div className="w-full flex flex-col px-3 pt-4 relative">
+      {isOpen && <RepostModal post={post} closeModal={closeModal} />}
       <div className="flex gap-2.5 pb-5">
         <Icons name={backIcon} onClick={() => router.back()} className="cursor-pointer" />
         <p className="text-xl font-bold">Post</p>
@@ -49,7 +53,7 @@ const PostDetail = ({ post }: PostDetailProps) => {
           <p>{post.totalLikes}</p>
         </div>
         <div className="flex gap-x-1 items-center cursor-pointer">
-          <Icons name={repostIcon} />
+          <Icons name={repostIcon} onClick={openModal} />
           <p>{post.totalLikes}</p>
         </div>
         <div className="flex gap-x-1 items-center cursor-pointer">
