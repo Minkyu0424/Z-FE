@@ -1,13 +1,7 @@
-interface ImageFileTypes {
-  type: 'image';
-  file: File;
-  preview: string;
-}
-
-interface PostTypes {
+interface CommentTypes {
   profile: string;
   nickname: string;
-  tag: string;
+  tag?: string;
   userId: string;
   createdAt: string;
   content: string;

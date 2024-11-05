@@ -10,8 +10,8 @@ const SideBar = () => {
   const pathname = usePathname();
 
   return (
-    <div className="w-16 h-screen flex-col-center pt-6 gap-y-10 border-r border-r-main-2">
-      <div className="relative w-16 h-16">
+    <div className="w-16 h-min-screen flex-col-center pt-6 gap-y-10 border-r border-r-main-2">
+      <div className="relative w-[62px] h-[62px]">
         <Image src="/logo_z.jpg" alt="로고사진" fill />
       </div>
       <div className="w-full flex flex-col items-center gap-y-[50px]">

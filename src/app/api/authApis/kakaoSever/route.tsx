@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 const CLIENT_ID = process.env.KAKAO_CLIENT_ID;
 const REDIRECT_URI = process.env.KAKAO_REDIRECT_URI;
-const API_URL = process.env.NEXT_PUBLIC_API_URL ;
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
@@ -56,7 +56,7 @@ export async function GET(request: NextRequest) {
       // 기존 사용자인 경우 성공 페이지로 리다이렉트
       // JWT 토큰이 응답에 포함되어 있다고 가정
       const { token } = userData;
-      
+
       // JWT 토큰을 쿠키에 저장
       const response = NextResponse.redirect('/auth/oauth/kakao/success');
       response.cookies.set('auth_token', token, {
@@ -69,7 +69,6 @@ export async function GET(request: NextRequest) {
 
       return response;
     }
-
   } catch (error) {
     console.error('Error in Kakao login process:', error);
     return NextResponse.redirect('/login?error=login_failed');

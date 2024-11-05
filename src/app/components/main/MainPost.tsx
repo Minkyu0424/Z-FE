@@ -1,5 +1,6 @@
-import { commentIcon, dotIcon, postLikeIcon, repostIcon } from '@/app/constants/iconPath';
+import { commentIcon, dotIcon, postLikeIconSM, repostIcon } from '@/app/constants/iconPath';
 import Image from 'next/image';
+import Link from 'next/link';
 import Icons from '../common/ui/Icons';
 
 interface MainPostProps {
@@ -7,20 +8,19 @@ interface MainPostProps {
 }
 
 const MainPost = ({ post }: MainPostProps) => {
+  //게시물 하나 컴포넌트
+
   return (
-    <div className="flex px-3 w-full border-b border-b-main-2 pb-2.5">
+    <Link href="/post/1" className="flex px-3 w-full border-b border-b-main-2 pb-2.5 cursor-pointer">
       <div className="w-8 h-8 relative">
         <Image src={post.profile} alt="프로필" fill />
       </div>
-      <div className="w-full flex flex-col gap-y-2 px-2.5 text-[12px]">
-        <div className="flex items-center gap-x-1 text-colors-main-1">
+      <div className="w-full flex flex-col gap-y-2 px-2.5 text-[14px]">
+        <div className="flex items-center gap-x-1 text-main-1">
           <p className="text-black font-semibold">{post.nickname}</p>
           <p>@{post.userId}</p>
           <Icons name={dotIcon} />
-          <p>
-            @{post.userId}
-            {post.createdAt}
-          </p>
+          <p>{post.createdAt}</p>
         </div>
         <div className="w-full flex-wrap">{post.content}</div>
         <p className="font-bold">#{post.tag}</p>
@@ -33,7 +33,7 @@ const MainPost = ({ post }: MainPostProps) => {
         </div>
         <div className="flex pl-2.5 gap-x-5 text-xs">
           <div className="flex gap-x-1 items-center cursor-pointer">
-            <Icons name={postLikeIcon} />
+            <Icons name={postLikeIconSM} />
             <p>{post.totalLikes}</p>
           </div>
           <div className="flex gap-x-1 items-center cursor-pointer">
@@ -46,7 +46,7 @@ const MainPost = ({ post }: MainPostProps) => {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
