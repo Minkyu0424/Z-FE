@@ -8,6 +8,6 @@ export const BUTTON_STYLE = {
 } as const;
 
 export const INPUT_STYLE = {
-  default: (className: string) => `w-full ${className}`,
+  default: (className: string) => `w-full pl-8 px-3 h-8 rounded border border-main-2 text-xs ${className}`,
   comment: (className: string) => `w-[255px] h-10 text-sm outline-none ${className}`,
 } as const;

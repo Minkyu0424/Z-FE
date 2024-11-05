@@ -15,8 +15,9 @@ const config: Config = {
         main: {
           0: '#333333',
           1: '#7C7C7C',
-          2: '#CFCFCF',
-          3: '#EDEDED',
+          2: '#CBCACA',
+          3: '#CFCFCF',
+          4: '#EDEDED',
         },
       },
     },
