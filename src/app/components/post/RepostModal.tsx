@@ -77,7 +77,7 @@ const RepostModal = ({ post, closeModal }: RepostModalProps) => {
             </div>
             <input type="file" accept="image/*" onChange={handleImageChange} ref={fileInputRef} className="hidden" />
             {files.length !== 0 && <MainImages uploads={files} handleDeleteImage={handleDeleteImage} />}
-            <Repost post={post} />
+            <Repost post={post} isModal={false} />
           </div>
         </div>
         <div className="w-full flex justify-between pt-3 border-white border-t">
