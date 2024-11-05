@@ -5,10 +5,10 @@ interface ImageFileTypes {
 }
 
 interface PostTypes {
-  profile:string
+  profile: string;
   nickname: string;
   tag: string;
-  userId:string
+  userId: string;
   createdAt: string;
   content: string;
   totalLikes: number;

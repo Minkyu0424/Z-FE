@@ -23,9 +23,7 @@ export async function POST(req: NextRequest) {
 export async function GET(req: NextRequest) {
   try {
     const tag = req.nextUrl.searchParams.get('tag');
-    const checkDuplicationResponse = await fetch(
-      `${API_URL}/api/members/tag/is-duplication?tag=${tag}`,
-    );
+    const checkDuplicationResponse = await fetch(`${API_URL}/api/members/tag/is-duplication?tag=${tag}`);
     const data = await checkDuplicationResponse.json();
     return NextResponse.json(data, { status: checkDuplicationResponse.status });
   } catch (error) {

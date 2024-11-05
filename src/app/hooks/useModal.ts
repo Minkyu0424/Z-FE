@@ -14,9 +14,7 @@ export const useModal = (initialState: boolean) => {
   };
 
   //모달 클릭 이벤트가 내부 이벤트에 의해 막히는 경우 사용
-  const handleModalClick = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-  ) => {
+  const handleModalClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     event.stopPropagation();
   };
 

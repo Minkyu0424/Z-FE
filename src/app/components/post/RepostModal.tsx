@@ -14,7 +14,7 @@ interface RepostModalProps {
   closeModal: () => void;
 }
 
-  //게시물에서 리포스트 클릭시 리포스트 작성 모달
+//게시물에서 리포스트 클릭시 리포스트 작성 모달
 
 const RepostModal = ({ post, closeModal }: RepostModalProps) => {
   const contentInputRef = useRef<HTMLTextAreaElement | null>(null);
