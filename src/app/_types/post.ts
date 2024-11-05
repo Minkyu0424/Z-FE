@@ -9,3 +9,9 @@ interface CommentTypes {
   totalComment: number;
   files: string[];
 }
+
+interface UserTypes {
+  profile: string;
+  nickname: string;
+  userId: string;
+}
