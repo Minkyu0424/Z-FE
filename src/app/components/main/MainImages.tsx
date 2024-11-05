@@ -7,6 +7,8 @@ interface MainImagesProps {
 }
 
 const MainImages = ({ uploads, handleDeleteImage }: MainImagesProps) => {
+  //메인에서 이미지를 나열하는 컴포넌트
+
   return (
     <div className="mt-3 pl-12 w-full flex flex-col gap-y-2">
       <div className="flex gap-x-2">

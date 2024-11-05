@@ -10,6 +10,7 @@ import RepostModal from './RepostModal';
 interface PostDetailProps {
   post: PostTypes;
 }
+  //게시물 상세 페이지의 게시물 내용과 해당 파트 헤더를 포함하는 컴포넌트
 
 const PostDetail = ({ post }: PostDetailProps) => {
   const router = useRouter();

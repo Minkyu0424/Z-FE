@@ -3,6 +3,8 @@ import MainPost from './MainPost';
 import MainUpload from './MainUpload';
 
 const MainContainer = () => {
+  //메인화면의 작성 컴포넌트 + 게시물 목록 컴포넌트
+
   return (
     <div className="flex-1 pt-6 flex-col h-[calc(100vh-140px)] w-full">
       <MainUpload />

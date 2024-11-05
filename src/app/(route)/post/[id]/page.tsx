@@ -11,7 +11,7 @@ interface Props {
 
 export default async function PostDetailPage({ params }: Props) {
   const { id } = params;
-
+//게시물 상세 id 받아와서 요청, parallel 라우트랑 단순 페이지 전환 중 고민임
   return (
     <div className="flex bg-white w-[480px]">
       <SideBar />

@@ -9,6 +9,8 @@ import Icons from '../common/ui/Icons';
 import Input from '../common/ui/Input';
 
 const CommentContainer = () => {
+  //댓글창 및 댓글들이 담긴 컨테이너 컴포넌트
+
   return (
     <div className="w-full flex flex-col px-3">
       <div className="py-1 px-3 rounded-xl flex border border-[#cecece] items-center justify-between">

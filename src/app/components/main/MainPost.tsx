@@ -8,6 +8,8 @@ interface MainPostProps {
 }
 
 const MainPost = ({ post }: MainPostProps) => {
+  //게시물 하나 컴포넌트
+
   return (
     <Link href="/post/1" className="flex px-3 w-full border-b border-b-main-2 pb-2.5 cursor-pointer">
       <div className="w-8 h-8 relative">

@@ -9,10 +9,13 @@ import Icons from '../common/ui/Icons';
 import MainImages from './MainImages';
 
 const MainUpload = () => {
+  //게시물 작성 중 파일 입력 컴포넌트
+
   const contentInputRef = useRef<HTMLTextAreaElement | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [files, setFiles] = useState<ImageFileTypes[]>([]);
 
+  // 사진 추가 함수
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file && files.length < 4) {
@@ -23,11 +26,12 @@ const MainUpload = () => {
       alert('사진은 최대 4개까지 업로드 가능합니다.');
     }
   };
-
+  // file input을 아이콘을 통해 하기 위한 함수
   const handleIconClick = () => {
     fileInputRef.current?.click();
   };
 
+  // 사진 추가에 따른 post파트 높이 증가
   const handleResize = () => {
     if (contentInputRef.current) {
       contentInputRef.current.style.height = 'auto';
@@ -35,10 +39,12 @@ const MainUpload = () => {
     }
   };
 
+  // 추가된 사진 삭제 함수
   const handleDeleteImage = (index: number) => {
     setFiles((prev) => prev.filter((_, i) => i !== index));
   };
 
+  // 게시물 post 함수 아직은 예외처리만  포함
   const handleSubmit = async () => {
     const textContent = contentInputRef.current?.value.trim();
     if (!textContent && files.length === 0) {
