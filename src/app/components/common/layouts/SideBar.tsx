@@ -11,9 +11,9 @@ const SideBar = () => {
 
   return (
     <div className="w-16 h-min-screen flex-col-center pt-6 gap-y-10 border-r border-r-main-2">
-      <div className="relative w-[62px] h-[62px]">
+      <Link className="relative w-[62px] h-[62px]" href="/">
         <Image src="/logo_z.jpg" alt="로고사진" fill />
-      </div>
+      </Link>
       <div className="w-full flex flex-col items-center gap-y-[50px]">
         {SIDEBAR_ICONS.map((icon, i) => (
           <Link href={SIDEBAR_PATHS[i]}>
