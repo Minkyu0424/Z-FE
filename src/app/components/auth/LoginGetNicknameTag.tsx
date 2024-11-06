@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
 
 const LoginGetNicknameTag = () => {
   const [formData, setFormData] = useState({
@@ -49,8 +49,7 @@ const LoginGetNicknameTag = () => {
       });
 
       if (response.ok) {
-        console.log('회원가입 성공!');
-        router.push('/login'); // 로그인 페이지로 리다이렉트
+        router.push('/complete'); // 로그인 페이지로 리다이렉트
       } else {
         console.error('회원가입 실패');
       }

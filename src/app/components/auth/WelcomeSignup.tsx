@@ -1,5 +1,6 @@
-import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
 
 interface WelcomeComponentProps {
   nickname: string;
@@ -19,7 +20,9 @@ const WelcomeSignup: React.FC<WelcomeComponentProps> = ({ nickname }) => {
           <br />
           지금 바로 Z를 시작해보세요
         </p>
-        <button className="bg-black text-white py-2 px-4 rounded">시작하기</button>
+        <Link href="/login" className="bg-black text-white py-2 px-4 rounded">
+          시작하기
+        </Link>
       </div>
     </div>
   );
