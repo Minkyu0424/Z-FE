@@ -19,7 +19,6 @@ const LoginStartForm = () => {
     setCode(searchParams.get('code'));
     if (!code) return;
     const fetchAccessToken = async () => {
-      console.log('effect');
       try {
         const response = await fetch(`/api/redirect?code=${code}`);
         if (response.redirected) {

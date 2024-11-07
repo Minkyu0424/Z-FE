@@ -26,8 +26,6 @@ const LoginGetNicknameTag = () => {
         method: 'GET',
       });
       const data = await response.json();
-      console.log(data, '태그 중복 여부');
-
       setIsTagAvailable(!data.isDuplicate);
     } catch (error) {
       console.error('태그 중복 확인 중 오류 발생:', error);
@@ -38,7 +36,6 @@ const LoginGetNicknameTag = () => {
     e.preventDefault();
     try {
       const birthDate = `${formData.year}-${formData.month.padStart(2, '0')}-${formData.day.padStart(2, '0')}`;
-
       const response = await fetch('/api/signup', {
         method: 'POST',
         headers: {
@@ -52,12 +49,10 @@ const LoginGetNicknameTag = () => {
         }),
       });
       const data = await response.json();
-      console.log('client 단에서 응답 : ', data);
-
       if (response) {
-        router.push('/login');
+        router.push('/welcome');
       } else {
-        console.error('회원가입 실패');
+        router.push('/');
       }
     } catch (error) {
       console.error('회원가입 중 오류 발생:', error);
