@@ -22,10 +22,12 @@ const LoginGetNicknameTag = () => {
 
   const checkTagAvailability = async () => {
     try {
-      const response = await fetch(`/api/authApis/signup?tag=${formData.tag}`, {
+      const response = await fetch(`/api/signup?tag=${formData.tag}`, {
         method: 'GET',
       });
       const data = await response.json();
+      console.log(data, '태그 중복 여부');
+
       setIsTagAvailable(!data.isDuplicate);
     } catch (error) {
       console.error('태그 중복 확인 중 오류 발생:', error);
@@ -36,20 +38,24 @@ const LoginGetNicknameTag = () => {
     e.preventDefault();
     try {
       const birthDate = `${formData.year}-${formData.month.padStart(2, '0')}-${formData.day.padStart(2, '0')}`;
-      const response = await fetch('/api/authApis/signup', {
+
+      const response = await fetch('/api/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify({
           nickname: formData.nickname,
           tag: formData.tag,
           birthDate,
         }),
       });
+      const data = await response.json();
+      console.log('client 단에서 응답 : ', data);
 
-      if (response.ok) {
-        router.push('/complete'); // 로그인 페이지로 리다이렉트
+      if (response) {
+        router.push('/login');
       } else {
         console.error('회원가입 실패');
       }
@@ -59,8 +65,8 @@ const LoginGetNicknameTag = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+    <div className="flex w-[480px] justify-center items-center min-h-screen bg-white">
+      <div className=" p-8 rounded-lg shadow-md max-w-md">
         <div className="flex justify-center items-center">
           <Image src="/logo_Z.jpg" alt="Logo" width={100} height={100} />
         </div>
