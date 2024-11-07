@@ -19,13 +19,10 @@ const SearchPeople = ({ users }: SearchPeopleProps) => {
               <div className="text-main-1 text-xs">@{user.userId}</div>
             </div>
           </div>
-          <Button
-            buttonText="Follow"
-            type="profile"
-            onClickHandler={()=>console.log('팔로우 하는 로직')}
-          />
+          <Button buttonText="Follow" type="profile" onClickHandler={() => console.log('팔로우 하는 로직')} />
         </div>
-      ))}{users.map((user, i) => (
+      ))}
+      {users.map((user, i) => (
         <div className="h-9 w-full flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="w-9 h-9 relative rounded-full">
@@ -36,11 +33,7 @@ const SearchPeople = ({ users }: SearchPeopleProps) => {
               <div className="text-main-1 text-xs">@{user.userId}</div>
             </div>
           </div>
-          <Button
-            buttonText="Follow"
-            type="profile"
-            onClickHandler={()=>console.log('팔로우 하는 로직')}
-          />
+          <Button buttonText="Follow" type="profile" onClickHandler={() => console.log('팔로우 하는 로직')} />
         </div>
       ))}
     </div>

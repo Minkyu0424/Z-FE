@@ -1,18 +1,20 @@
+import { getCookie } from '@/app/utils/setToken';
 import { NextRequest, NextResponse } from 'next/server';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://43.203.123.147:8080';
+const API_URL = process.env.NEXT_PUBLIC_SERVER;
 
 export async function POST(req: NextRequest) {
   try {
+    const kakaoId = getCookie(req, 'kakaoId');
     const { nickname, tag, birthDate } = await req.json();
     const signupResponse = await fetch(`${API_URL}/api/auth/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Cookie: `kakaoId=${kakaoId}`,
       },
       body: JSON.stringify({ nickname, tag, birthDate }),
     });
-
     const data = await signupResponse.json();
     return NextResponse.json(data, { status: signupResponse.status });
   } catch (error) {

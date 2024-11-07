@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
 
 const LoginGetNicknameTag = () => {
   const [formData, setFormData] = useState({
@@ -22,7 +22,7 @@ const LoginGetNicknameTag = () => {
 
   const checkTagAvailability = async () => {
     try {
-      const response = await fetch(`/api/authApis/signup?tag=${formData.tag}`, {
+      const response = await fetch(`/api/signup?tag=${formData.tag}`, {
         method: 'GET',
       });
       const data = await response.json();
@@ -36,23 +36,23 @@ const LoginGetNicknameTag = () => {
     e.preventDefault();
     try {
       const birthDate = `${formData.year}-${formData.month.padStart(2, '0')}-${formData.day.padStart(2, '0')}`;
-      const response = await fetch('/api/authApis/signup', {
+      const response = await fetch('/api/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify({
           nickname: formData.nickname,
           tag: formData.tag,
           birthDate,
         }),
       });
-
-      if (response.ok) {
-        console.log('회원가입 성공!');
-        router.push('/login'); // 로그인 페이지로 리다이렉트
+      const data = await response.json();
+      if (response) {
+        router.push('/welcome');
       } else {
-        console.error('회원가입 실패');
+        router.push('/');
       }
     } catch (error) {
       console.error('회원가입 중 오류 발생:', error);
@@ -60,8 +60,8 @@ const LoginGetNicknameTag = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+    <div className="flex w-[480px] justify-center items-center min-h-screen bg-white">
+      <div className=" p-8 rounded-lg shadow-md max-w-md">
         <div className="flex justify-center items-center">
           <Image src="/logo_Z.jpg" alt="Logo" width={100} height={100} />
         </div>
