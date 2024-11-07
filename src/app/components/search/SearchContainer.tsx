@@ -1,7 +1,7 @@
 'use client';
 
 import { searchIconSM } from '@/app/constants/iconPath';
-import { SEARCH_PLACEHOLDER, SEARCH_TYPES } from '@/app/constants/search';
+import { NO_RESULT_TEXT, SEARCH_PLACEHOLDER, SEARCH_TYPES } from '@/app/constants/search';
 import { mockPosts } from '@/app/data/mockPost';
 import { mockUsers } from '@/app/data/mockUsers';
 import { useState } from 'react';
@@ -36,7 +36,7 @@ const SearchContainer = () => {
         ))}
       </div>
       {data.length !== 0 ? (
-        <NoSearch />
+        <NoSearch text={NO_RESULT_TEXT} />
       ) : isPost ? (
         <SearchPosts posts={mockPosts} />
       ) : (
