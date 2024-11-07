@@ -13,11 +13,7 @@ const setSessionTimeout = (duration: number) => {
   }, duration - 3000); // 만료 3초 전에 알림
 };
 
-export const setTokens = (
-  accessToken: string,
-  refreshToken: string,
-  isRefresh: boolean = false,
-) => {
+export const setTokens = (accessToken: string, refreshToken: string, isRefresh: boolean = false) => {
   try {
     const accessTokenExpires = isRefresh
       ? new Date(Date.now() + 1000 * 60 * 120) // 연장된 토큰 시간 (120분)
@@ -34,7 +30,6 @@ export const setTokens = (
     const timeoutDuration = accessTokenExpires.getTime() - Date.now();
     setSessionTimeout(timeoutDuration);
   } catch (error) {
-    console.error('토큰 설정 중 오류 발생:', error);
     throw error;
   }
 };

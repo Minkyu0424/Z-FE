@@ -1,1 +1,1 @@
-type SearchTypes = 'POST' | 'PEOPLE'
+type SearchTypes = 'POST' | 'PEOPLE';
