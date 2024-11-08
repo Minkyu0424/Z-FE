@@ -1,6 +1,7 @@
 'use client';
 
 import { INPUT_STYLE } from '@/app/constants/styles';
+import { KeyboardEvent } from 'react';
 
 interface InputProps {
   type: keyof typeof INPUT_STYLE;
@@ -13,7 +14,7 @@ interface InputProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onBlur?: () => void;
-  onEnterPress?: () => void;
+  onEnterPress?: (e: KeyboardEvent<HTMLInputElement>) => void;
   isDisabled?: boolean;
   pattern?: string;
   min?: string | number;
@@ -51,7 +52,7 @@ function Input({
       name={name}
       onFocus={onFocus}
       onBlur={onBlur}
-      onKeyDown={(e) => e.key === 'Enter' && onEnterPress && onEnterPress()}
+      onKeyDown={onEnterPress}
       onChange={onChange}
       className={inputStyles}
       accept={accept}

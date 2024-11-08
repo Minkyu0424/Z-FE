@@ -13,6 +13,8 @@ export const BUTTON_STYLE = {
 
 export const INPUT_STYLE = {
   default: (className: string) => `w-full pl-8 px-3 h-8 rounded border border-main-2 text-xs outline-none ${className}`,
-  newChat: (className: string) => `w-full h-10 text-xs outline-none border-b border-[#ececec] pl-[30px] bg-black ${className}`,
+  newChat: (className: string) =>
+    `w-full h-10 text-xs outline-none border-b border-[#ececec] pl-[30px] bg-black ${className}`,
   comment: (className: string) => `w-[255px] h-10 text-sm outline-none ${className}`,
+  message: (className: string) => `w-[260px] h-7 text-sm outline-none bg-main-4 ${className}`,
 } as const;

@@ -4,7 +4,7 @@ import { backIcon, newChatICon, searchIconSM } from '@/app/constants/iconPath';
 import { CHAT_PLACEHOLDER, NO_CHAT_TEXT } from '@/app/constants/messages';
 import { mockChatPreviews } from '@/app/data/mockChats';
 import { useModal } from '@/app/hooks/useModal';
-import router from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Icons from '../common/ui/Icons';
 import Input from '../common/ui/Input';
@@ -16,7 +16,7 @@ const MessagesContainer = () => {
   const [text, setText] = useState('');
   const [chats, setChats] = useState<ChatPreviewTypes[]>(mockChatPreviews);
   const { isOpen, closeModal, openModal } = useModal(false);
-
+  const router = useRouter();
   return (
     <div className="flex-1 flex flex-col gap-y-2.5 pt-4 px-3 h-screen relative">
       {isOpen && <NewChatModal closeModal={closeModal} />}
