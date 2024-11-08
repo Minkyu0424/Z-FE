@@ -58,7 +58,7 @@ const RepostModal = ({ post, closeModal }: RepostModalProps) => {
   };
 
   return (
-    <div className="fixed inset-0 flex-center bg-gray-1 bg-opacity-70 z-50">
+    <div className="fixed inset-0 flex-center bg-main-3 bg-opacity-10 z-50">
       <div className="flex flex-col w-[400px] h-[520px] p-5 bg-black text-white rounded-xl justify-between">
         <div className="flex flex-col">
           <div className="flex gap-4 items-center">

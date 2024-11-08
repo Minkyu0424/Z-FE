@@ -24,7 +24,7 @@ const MyProfile = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto bg-white">
+    <div className="max-w-2xl mx-auto bg-white h-screen">
       <EditProfileModal
         isOpen={isEditModalOpen}
         onClose={() => setIsEditModalOpen(false)}
