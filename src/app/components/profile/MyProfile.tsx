@@ -12,6 +12,7 @@ import FollowerListModal from './FollowerListModal';
 interface Profile {
   username: string;
   handle: string;
+  tag: string;
   bio: string;
   following: number;
   followers: number;
@@ -21,10 +22,11 @@ const MyProfile = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isFollowingModalOpen, setIsFollowingModalOpen] = useState(false);
   const [isFollowerModalOpen, setIsFollowerModalOpen] = useState(false);
-  
+
   const [profile, setProfile] = useState<Profile>({
     username: "투자초보",
     handle: "@Warren_Buffett",
+    tag: "Warren_Buffett",
     bio: "좋은 펀드매니져가 되도록 노력중인 사람이에요.",
     following: 800,
     followers: 1232
@@ -47,17 +49,18 @@ const MyProfile = () => {
       />
 
       {/* Following List Modal */}
-      <FollowingListModal 
+      <FollowingListModal
         isOpen={isFollowingModalOpen}
         onClose={() => setIsFollowingModalOpen(false)}
         followingCount={profile.following}
       />
 
       {/* Follower List Modal */}
-      <FollowerListModal 
+      <FollowerListModal
         isOpen={isFollowerModalOpen}
         onClose={() => setIsFollowerModalOpen(false)}
         followerCount={profile.followers}
+        tag={profile.tag}  // tag 속성 추가
       />
 
       {/* Header */}
@@ -99,7 +102,7 @@ const MyProfile = () => {
         <h1 className="font-bold text-xl">{profile.username}</h1>
         <p className="text-gray-600">{profile.handle}</p>
         <p className="mt-2">{profile.bio}</p>
-        
+
         <div className="flex space-x-4 mt-4">
           <button
             onClick={() => setIsFollowingModalOpen(true)}
