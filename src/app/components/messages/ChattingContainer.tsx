@@ -10,9 +10,8 @@ import Icons from '../common/ui/Icons';
 import Input from '../common/ui/Input';
 
 const ChattingContainer = () => {
-  const [messages, setMessages] = useState<{ message: string; date: string }[]>([]);
+  const [messages, setMessages] = useState<ChatTypes[]>([{ sender: 'ohter', message: '안녕??', date: '11:23' }]);
   const [inputValue, setInputValue] = useState('');
-  console.log(messages);
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && !e.nativeEvent.isComposing) {
@@ -22,7 +21,8 @@ const ChattingContainer = () => {
 
   const handleSendMessage = () => {
     if (inputValue.trim() !== '') {
-      const newMessage = {
+      const newMessage: ChatTypes = {
+        sender: 'me',
         message: inputValue,
         date: new Date().toLocaleTimeString('ko-KR', {
           hour: '2-digit',
@@ -53,12 +53,17 @@ const ChattingContainer = () => {
         <p className="text-main-1 text-[11px]">@{mockUsers[0].userId}</p>
         <p className="text-xs">{'좋은 개발자가 되도록 노력중인 사람이에요.'}</p>
       </div>
-      <div className="flex flex-col h-full justify-between pb-4 items-end">
-        <div className="flex-1 overflow-y-auto rounded-lg p-2 gap-y-3 flex-col flex">
+      <div className="flex flex-col h-full justify-between pb-4 items-end overflow-y-auto">
+        <div className="w-full rounded-lg p-2 gap-y-[14px] flex-col flex overflow-y-auto">
           {messages.map((item, index) => (
-            <div key={index} className="inline-flex px-4 py-2 bg-black text-white rounded-md text-sm relative">
+            <div
+              key={index}
+              className={`inline-flex px-4 py-2 text-white rounded-md text-sm relative mb-0.5 ${
+                item.sender === 'me' ? 'bg-blue-500 self-end' : 'bg-gray-500 self-start'
+              }`}
+            >
               {item.message}
-              <p className="absolute top-8 right-1 text-[10px] text-main-0">{item.date}</p>
+              <p className="absolute top-8 right-1 text-[10px] h-1 text-main-0">{item.date}</p>
             </div>
           ))}
         </div>
