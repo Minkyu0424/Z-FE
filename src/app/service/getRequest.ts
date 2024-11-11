@@ -15,7 +15,7 @@ const getRequest = async (url: string, req: Request) => {
   return response.json();
 };
 
-export const getMain = async (req: Request) => {
-  const url = '/api/v1/main';
+export const getPost = async (req: Request, postId: string) => {
+  const url = `/api/posts/${postId}`;
   return getRequest(url, req);
 };
