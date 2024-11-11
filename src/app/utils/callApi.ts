@@ -8,12 +8,15 @@ export async function callGet(url: string) {
   return data;
 }
 
-export async function callPost(url: string, body?: any) {
-  const response = await fetch(url, {
+export async function callPost(url: string, body?: FormData | any) {
+  const options: RequestInit = {
     method: 'POST',
-    headers,
-    body: JSON.stringify(body),
-  });
+    body: body instanceof FormData ? body : JSON.stringify(body),
+  };
+  if (!(body instanceof FormData)) {
+    options.headers = { 'Content-Type': 'application/json' };
+  }
+  const response = await fetch(url, options);
   const data = await response.json();
   return data;
 }

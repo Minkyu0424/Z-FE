@@ -4,6 +4,7 @@ import { imageIcon } from '@/app/constants/iconPath';
 import { MAIN_POST_PLACEHOLDER } from '@/app/constants/main';
 import { useAutoResize } from '@/app/hooks/useAutoResize';
 import { useImageUpload } from '@/app/hooks/useIamgeUpload';
+import { callPost } from '@/app/utils/callApi';
 import Image from 'next/image';
 import Button from '../common/ui/Button';
 import Icons from '../common/ui/Icons';
@@ -15,9 +16,26 @@ const MainUpload = () => {
 
   const handleSubmit = async () => {
     const textContent = contentInputRef.current?.value.trim();
+
     if (!textContent && files.length === 0) {
       return;
     }
+
+    const formData = new FormData();
+
+    const postRequestDTO = JSON.stringify({
+      content: textContent || '',
+      parentPostId: null,
+      quotePostId: null,
+    });
+    formData.append('postRequestDTO', new Blob([postRequestDTO], { type: 'application/json' }));
+
+    files.forEach((file, index) => {
+      formData.append(`images`, file.file);
+    });
+
+    await callPost('/api/post', formData);
+
     if (contentInputRef.current) {
       contentInputRef.current.value = '';
     }
