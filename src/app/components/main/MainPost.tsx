@@ -14,12 +14,11 @@ interface MainPostProps {
 
 const MainPost = ({ post }: MainPostProps) => {
   const { isOpen: isOpenEdit, openModal: openEdit, closeModal: closeEdit } = useModal(false);
-
   const { isOpen: isOpenDel, openModal: openDel, closeModal: closeDel } = useModal(false);
 
   return (
     <div className="flex px-3 w-full border-b border-b-main-2 pb-2.5">
-      {isOpenEdit && <PostEditModal post={post} closeModal={closeEdit} />}
+      {isOpenEdit && <PostEditModal postId={post.userId} closeModal={closeEdit} />}
       {isOpenDel && <PostDeleteModal postId={'1'} closeModal={closeDel} />}
       <div className="w-8 h-8 relative">
         <Image src={post.profile} alt="프로필" fill />

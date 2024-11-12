@@ -1,22 +1,25 @@
 'use client';
 
-import { backIcon } from '@/app/constants/iconPath';
+import { backIcon, commentIcon, deleteIcon, dotIcon, pencilIcon, repostIcon } from '@/app/constants/iconPath';
 import { useModal } from '@/app/hooks/useModal';
 import { callGet } from '@/app/utils/callApi';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Icons from '../common/ui/Icons';
-import getRandomProfileImage from '@/app/utils/randomProfile';
+import PostDeleteModal from '../edit/PostDeleteModal';
+import PostEditModal from '../edit/PostEditModal';
+import RepostModal from './RepostModal';
 
 interface PostDetailProps {
   postId: string;
 }
-//게시물 상세 페이지의 게시물 내용과 해당 파트 헤더를 포함하는 컴포넌트
 
 const PostDetail = ({ postId }: PostDetailProps) => {
   const router = useRouter();
-  const { isOpen, openModal, closeModal } = useModal(false);
+  const { isOpen: isOpenEdit, openModal: openEdit, closeModal: closeEdit } = useModal(false);
+  const { isOpen: isOpenDel, openModal: openDel, closeModal: closeDel } = useModal(false);
+  const { isOpen: isOpenRepost, openModal: openRepost, closeModal: closeRepost } = useModal(false);
   const [postData, setPostData] = useState<PostDetailTypes | null>(null);
 
   useEffect(() => {
@@ -34,23 +37,30 @@ const PostDetail = ({ postId }: PostDetailProps) => {
 
   return (
     <div className="w-full flex flex-col px-3 pt-4 relative">
-      {/* {isOpen && <RepostModal post={postData} closeModal={closeModal} />} */}
+      {isOpenRepost && postData && <RepostModal post={postData} closeModal={closeRepost} />}
+      {isOpenEdit && <PostEditModal postId={postId} closeModal={closeEdit} />}
+      {isOpenDel && <PostDeleteModal postId={postId} closeModal={closeDel} />}
       <div className="flex gap-2.5 pb-5">
         <Icons name={backIcon} onClick={() => router.back()} className="cursor-pointer" />
         <p className="text-xl font-bold">Post</p>
       </div>
-      <div className="flex items-center gap-x-2 px-2.5">
-        <div className="w-10 h-10 relative">
-          <Image src={getRandomProfileImage() || '/mock/profile1.png'} alt="프로필" fill />
+      <div className="flex w-full justify-between px-2.5">
+        <div className="flex items-center gap-x-2">
+          <div className="w-10 h-10 relative bg-main-1 rounded-full">
+            <Image src={'/mock/default.webp' || '/mock/profile1.png'} alt="프로필" fill className="rounded-full" />
+          </div>
+          <div className="text-sm">
+            <p className="text-black font-semibold mb-0.5">{postData?.authorNickname || '작성자'}</p>
+            <p className="text-xs text-main-1">@{postData?.authorTag || 'leetsBoy'}</p>
+          </div>
         </div>
-        <div className="text-sm">
-          <p className="text-black font-semibold mb-0.5">{postData?.authorNickname}</p>
-          <p className="text-xs text-main-1">@{postData?.authorTag}</p>
+        <div className="flex gap-x-2 pt-1">
+          <Icons name={pencilIcon} className="cursor-pointer" onClick={openEdit} />
+          <Icons name={deleteIcon} className="cursor-pointer" onClick={openDel} />
         </div>
       </div>
       <div className="w-full flex flex-col gap-y-2 px-2.5 text-[14px] pt-2">
-        <div className="w-full flex-wrap">{postData?.content}</div>
-        <p className="font-bold">#{postData?.authorTag}</p>
+        <div className="w-full flex-wrap">{postData?.content || '게시물을 받아오지 못했습니다.'}</div>
       </div>
       <div className="w-full flew-wrap flex gap-2 py-2">
         {postData?.imageUrls.map((file, i) => (
@@ -59,25 +69,25 @@ const PostDetail = ({ postId }: PostDetailProps) => {
           </div>
         ))}
       </div>
-      {/* <div className="flex text-sm items-center gap-2 text-main-1">
-        <p>{post.createdAt}</p>
+      <div className="flex text-sm items-center gap-2 text-main-1">
+        <p>{postData?.createdAt}</p>
         <Icons name={dotIcon} />
         <p className="font-semibold">24M</p>
       </div>
       <div className="flex gap-x-5 border-y border-main-2 py-2 text-sm font-medium mt-3 pl-2.5">
-        <div className="flex gap-x-1 items-center cursor-pointer">
+        {/* <div className="flex gap-x-1 items-center cursor-pointer">
           <Icons name={postLikeIcon} />
-          <p>{post.totalLikes}</p>
-        </div>
+          <p>{postData.totalLikes}</p>
+        </div> */}
         <div className="flex gap-x-1 items-center cursor-pointer">
-          <Icons name={repostIcon} onClick={openModal} />
-          <p>{post.totalLikes}</p>
+          <Icons name={repostIcon} onClick={openRepost} />
+          {/* <p>{postData.totalLikes}</p> */}
         </div>
         <div className="flex gap-x-1 items-center cursor-pointer">
           <Icons name={commentIcon} />
-          <p>{post.totalComment}</p>
+          {/* <p>{postData.totalComment}</p> */}
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };

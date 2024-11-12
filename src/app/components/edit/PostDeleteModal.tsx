@@ -10,7 +10,7 @@ interface PostDeleteModalProps {
 
 const PostDeleteModal = ({ postId, closeModal }: PostDeleteModalProps) => {
   const deletePost = () => {
-    callDelete(`/api/past-order/delete?pastorder_id=${postId}`);
+    callDelete(`/api/post?id=${postId}`);
     closeModal();
   };
 

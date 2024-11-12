@@ -2,6 +2,7 @@ import { closeIconSmall, ImageIconBig } from '@/app/constants/iconPath';
 import { REPOST_PLACEHOLDER, REPOST_TITLE } from '@/app/constants/post';
 import { useAutoResize } from '@/app/hooks/useAutoResize';
 import { useImageUpload } from '@/app/hooks/useIamgeUpload';
+import { callGet } from '@/app/utils/callApi';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import Button from '../common/ui/Button';
@@ -10,14 +11,27 @@ import MainImages from '../main/MainImages';
 import Repost from '../post/Repost';
 
 interface PostEditModalProps {
-  post: PostTypes;
+  postId: string;
   closeModal: () => void;
 }
 
-const PostEditModal = ({ post, closeModal }: PostEditModalProps) => {
+const PostEditModal = ({ postId, closeModal }: PostEditModalProps) => {
   const { files, fileInputRef, handleImageChange, handleIconClick, handleDeleteImage } = useImageUpload();
   const { contentInputRef, handleResize } = useAutoResize();
-  const [content, setContent] = useState(post.content);
+  const [postData, setPostData] = useState<PostDetailTypes | null>(null);
+
+  useEffect(() => {
+    const fetchPostDetail = async () => {
+      try {
+        const resData = await callGet(`/api/post?id=${postId}`);
+        setPostData(resData.data);
+        console.log(resData);
+      } catch (error) {
+        console.error('Error fetching post details:', error);
+      }
+    };
+    fetchPostDetail();
+  }, [postId]);
 
   function handleSubmit(): void {
     console.log('수정 api 요청 로직');
@@ -47,14 +61,13 @@ const PostEditModal = ({ post, closeModal }: PostEditModalProps) => {
                 ref={contentInputRef}
                 placeholder={REPOST_PLACEHOLDER}
                 onInput={handleResize}
-                defaultValue={post.content}
-                onChange={(e) => setContent(e.target.value)}
+                defaultValue={postData?.content}
                 className="flex outline-none bg-black resize-none w-[330px] p-2.5"
               />
             </div>
             <input type="file" accept="image/*" onChange={handleImageChange} ref={fileInputRef} className="hidden" />
             {files.length !== 0 && <MainImages uploads={files} handleDeleteImage={handleDeleteImage} />}
-            <Repost post={post} isModal={false} />
+            {postData && <Repost post={postData} isModal={false} />}
           </div>
         </div>
         <div className="w-full flex justify-between pt-3 border-white border-t">
