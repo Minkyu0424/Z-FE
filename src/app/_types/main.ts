@@ -15,3 +15,11 @@ interface PostTypes {
   totalComment: number;
   files: string[];
 }
+
+interface SearchUserTypes {
+  birthDate: string;
+  tag: string;
+  nickname: string;
+  introduction: string | null;
+  profilePicture: string | null;
+}

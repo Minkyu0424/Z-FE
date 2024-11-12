@@ -2,32 +2,51 @@
 
 import { searchIconSM } from '@/app/constants/iconPath';
 import { NO_RESULT_TEXT, SEARCH_PLACEHOLDER, SEARCH_TYPES } from '@/app/constants/search';
-import { mockPosts } from '@/app/data/mockPost';
-import { mockUsers } from '@/app/data/mockUsers';
-import { useState } from 'react';
+import { callGet } from '@/app/utils/callApi';
+import { KeyboardEvent, useState } from 'react';
 import Icons from '../common/ui/Icons';
 import Input from '../common/ui/Input';
 import NoSearch from './NoSearch';
 import SearchPeople from './SearchPeople';
-import SearchPosts from './SearchPosts';
 
 const SearchContainer = () => {
   const [text, setText] = useState('');
   const [searchType, setSearchType] = useState<SearchTypes>('POST');
-  const [data, setData] = useState([]);
-  const isPost = searchType === 'POST';
+  const [userData, setUserData] = useState<SearchUserTypes | null>(null);
 
   const tagStyle = (tag: SearchTypes) => {
     return searchType === tag ? 'text-black border-b-2 border-black box-border' : 'text-main-1 pb-0.5';
   };
 
+  const searchUser = async () => {
+    const resData = await callGet(`/api/search?tag=${text}`);
+    console.log(resData);
+
+    if (resData.success) {
+      setUserData(resData.data);
+    }
+    setText('');
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && !e.nativeEvent.isComposing) {
+      searchUser();
+    }
+  };
+
   return (
     <div className="flex-1 flex flex-col gap-y-2.5 pt-4 px-3 h-screen relative">
       <Icons name={searchIconSM} className="absolute top-6 left-5" />
-      <Input type={'default'} onChange={(e) => setText(e.target.value)} placeholder={SEARCH_PLACEHOLDER} />
+      <Input
+        type={'default'}
+        onChange={(e) => setText(e.target.value)}
+        placeholder={SEARCH_PLACEHOLDER}
+        onEnterPress={handleKeyDown}
+      />
       <div className="flex w-full gap-x-[100px] justify-center mb-[14px]">
-        {SEARCH_TYPES.map((tag, i) => (
+        {SEARCH_TYPES.map((tag) => (
           <div
+            key={tag}
             onClick={() => setSearchType(tag)}
             className={`w-[70px] h-7 flex-center text-xl font-bold cursor-pointer ${tagStyle(tag)}`}
           >
@@ -35,14 +54,7 @@ const SearchContainer = () => {
           </div>
         ))}
       </div>
-      {data.length !== 0 ? (
-        <NoSearch text={NO_RESULT_TEXT} />
-      ) : isPost ? (
-        <SearchPosts posts={mockPosts} />
-      ) : (
-        <SearchPeople users={mockUsers} />
-      )}
-      {}
+      {userData ? <SearchPeople user={userData} /> : <NoSearch text={NO_RESULT_TEXT} />}
     </div>
   );
 };

@@ -16,7 +16,7 @@ const SideBar = () => {
       </Link>
       <div className="w-full flex flex-col items-center gap-y-[50px]">
         {SIDEBAR_ICONS.map((icon, i) => (
-          <Link href={SIDEBAR_PATHS[i]}>
+          <Link href={SIDEBAR_PATHS[i]} key={icon.path}>
             <Icons
               key={icon.path}
               name={pathname === SIDEBAR_PATHS[i] ? SIDEBAR_ICONS_SELECTED[i] : icon}

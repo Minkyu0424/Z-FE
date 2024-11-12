@@ -24,3 +24,8 @@ export const getAllPosts = async (req: Request, tag: string) => {
   const url = `/api/posts/posts?currentMemberTag=${tag}`;
   return getRequest(url, req);
 };
+
+export const getMember = async (req: Request, tag: string) => {
+  const url = `/api/members?tag=${tag}`;
+  return getRequest(url, req);
+};

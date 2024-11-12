@@ -19,6 +19,7 @@ const MainContainer = () => {
     };
     fetchPostDetail();
   }, []);
+
   return (
     <div className="flex-1 pt-6 flex-col h-screen w-full overflow-y-auto">
       <MainUpload />
