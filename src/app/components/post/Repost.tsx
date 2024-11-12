@@ -1,6 +1,7 @@
 import { dotIcon } from '@/app/constants/iconPath';
 import Image from 'next/image';
 import Icons from '../common/ui/Icons';
+import { formatDate } from '@/app/utils/date';
 
 interface RepostProps {
   post: PostDetailTypes;
@@ -23,7 +24,7 @@ const Repost = ({ post, isModal }: RepostProps) => {
           <p className=" font-semibold">{post.authorNickname}</p>
           <p>@{post.authorTag}</p>
           <Icons name={dotIcon} />
-          <p>{post.createdAt}</p>
+          <p>{formatDate(post.createdAt)}</p>
         </div>
         <div className="w-full flex-wrap">{post.content}</div>
       </div>

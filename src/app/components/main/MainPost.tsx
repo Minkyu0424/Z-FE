@@ -7,6 +7,7 @@ import Link from 'next/link';
 import Icons from '../common/ui/Icons';
 import PostDeleteModal from '../edit/PostDeleteModal';
 import PostEditModal from '../edit/PostEditModal';
+import { formatDate } from '@/app/utils/date';
 
 interface MainPostProps {
   post: PostTypes;
@@ -29,7 +30,7 @@ const MainPost = ({ post }: MainPostProps) => {
             <p className="text-black font-semibold">{post.nickname}</p>
             <p>@{post.userId}</p>
             <Icons name={dotIcon} />
-            <p>{post.createdAt}</p>
+            <p>{formatDate(post.createdAt)}</p>
           </div>
           <div className="flex gap-x-2">
             <Icons name={pencilIcon} className="cursor-pointer" onClick={openEdit} />

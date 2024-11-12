@@ -3,6 +3,7 @@
 import { backIcon, commentIcon, deleteIcon, dotIcon, pencilIcon, repostIcon } from '@/app/constants/iconPath';
 import { useModal } from '@/app/hooks/useModal';
 import { callGet } from '@/app/utils/callApi';
+import { formatDate } from '@/app/utils/date';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -54,6 +55,7 @@ const PostDetail = ({ postId }: PostDetailProps) => {
             <p className="text-xs text-main-1">@{postData?.authorTag || 'leetsBoy'}</p>
           </div>
         </div>
+        {/* {postData?.authorTag===user.authorTag && } */}
         <div className="flex gap-x-2 pt-1">
           <Icons name={pencilIcon} className="cursor-pointer" onClick={openEdit} />
           <Icons name={deleteIcon} className="cursor-pointer" onClick={openDel} />
@@ -69,10 +71,10 @@ const PostDetail = ({ postId }: PostDetailProps) => {
           </div>
         ))}
       </div>
-      <div className="flex text-sm items-center gap-2 text-main-1">
-        <p>{postData?.createdAt}</p>
+      <div className="flex text-sm items-center gap-2 text-main-1 pl-3">
+        <p>{formatDate(postData?.createdAt)}</p>
         <Icons name={dotIcon} />
-        <p className="font-semibold">24M</p>
+        <p className="font-semibold">24M View</p>
       </div>
       <div className="flex gap-x-5 border-y border-main-2 py-2 text-sm font-medium mt-3 pl-2.5">
         {/* <div className="flex gap-x-1 items-center cursor-pointer">

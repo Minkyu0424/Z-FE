@@ -7,6 +7,7 @@ export async function POST(req: Request) {
   const formData = await req.formData();
 
   const response = await createPost(formData, '000424', req);
+  console.log(response, '포스트 후 응답');
 
   return NextResponse.json(response);
 }
