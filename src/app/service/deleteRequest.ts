@@ -16,6 +16,6 @@ const deleteRequest = async (url: string, req: Request) => {
   return response.json();
 };
 
-export const deleteMain = async (id: string, req: Request) => {
-  return deleteRequest(`${SERVER_URL}/api/v1/quotations/${id}/delete`, req);
+export const deletePost = async (id: string, req: Request) => {
+  return deleteRequest(`${SERVER_URL}/api/posts/${id}?currentMemberTag=${'000424'}`, req);
 };
