@@ -39,4 +39,3 @@ export async function DELETE(req: Request) {
   const data = await deletePost(id, req);
   return NextResponse.json(data);
 }
-

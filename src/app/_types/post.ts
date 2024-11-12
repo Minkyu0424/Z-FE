@@ -25,5 +25,5 @@ interface PostDetailTypes {
   parentPostId: number | null;
   quotePost: number | null;
   childPosts: string[];
-  createdAt:string
+  createdAt: string;
 }

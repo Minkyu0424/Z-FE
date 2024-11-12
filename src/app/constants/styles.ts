@@ -7,8 +7,7 @@ export const BUTTON_STYLE = {
     `w-[68px] h-8 py-2 px-3 bg-white text-black rounded-[15px] text-xs font-medium ${className}`,
   profile: (className: string) =>
     `w-[60px] h-7 py-1 px-3 bg-main-0 text-white rounded-[15px] text-[11px] font-medium ${className}`,
-  deleteModal: (className: string) =>
-    `w-full h-8 flex-center rounded-xl text-[11px] font-semibold ${className}`,
+  deleteModal: (className: string) => `w-full h-8 flex-center rounded-xl text-[11px] font-semibold ${className}`,
 } as const;
 
 export const INPUT_STYLE = {

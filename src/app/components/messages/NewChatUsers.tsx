@@ -9,7 +9,6 @@ interface NewChatUsersProps {
 }
 
 const NewChatUsers = ({ users, setSelectedUser, selectedUser }: NewChatUsersProps) => {
-
   const handleUserClick = (userId: string) => {
     if (selectedUser === userId) {
       setSelectedUser('');

@@ -10,16 +10,22 @@ import EditProfileModal from './EditProfileModal';
 const MyProfile = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [profile, setProfile] = useState({
-    username: "투자초보",
-    handle: "@Warren_Buffett",
-    bio: "좋은 펀드매니져가 되도록 노력중인 사람이에요.",
+    username: '투자초보',
+    handle: '@Warren_Buffett',
+    bio: '좋은 펀드매니져가 되도록 노력중인 사람이에요.',
     following: 800,
-    followers: 1232
+    followers: 1232,
   });
 
-  const myPosts = mockPosts.filter(post => post.userId === 'user1');
+  const myPosts = mockPosts.filter((post) => post.userId === 'user1');
 
-  const handleProfileUpdate = (updatedProfile: { username: string; handle: string; bio: string; following: number; followers: number; }) => {
+  const handleProfileUpdate = (updatedProfile: {
+    username: string;
+    handle: string;
+    bio: string;
+    following: number;
+    followers: number;
+  }) => {
     setProfile(updatedProfile);
   };
 
@@ -71,7 +77,7 @@ const MyProfile = () => {
         <h1 className="font-bold text-xl">{profile.username}</h1>
         <p className="text-gray-600">{profile.handle}</p>
         <p className="mt-2">{profile.bio}</p>
-        
+
         <div className="flex space-x-4 mt-4">
           <Link href="#" className="text-gray-600 hover:underline">
             <span className="font-bold text-black">{profile.following}</span> Following

@@ -28,7 +28,6 @@ const PostDetail = ({ postId }: PostDetailProps) => {
       try {
         const resData = await callGet(`/api/post?id=${postId}`);
         setPostData(resData.data);
-        console.log(resData);
       } catch (error) {
         console.error('Error fetching post details:', error);
       }

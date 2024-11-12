@@ -22,7 +22,7 @@ const MainPost = ({ post }: MainPostProps) => {
       {isOpenEdit && <PostEditModal postId={post.id} closeModal={closeEdit} />}
       {isOpenDel && <PostDeleteModal postId={'1'} closeModal={closeDel} />}
       <div className="w-8 h-8 relative rounded-full">
-        <Image src={'/mock/default.webp'} alt="프로필" fill className='rounded-full'/>
+        <Image src={'/mock/default.webp'} alt="프로필" fill className="rounded-full" />
       </div>
       <div className="w-full flex flex-col gap-y-2 px-2.5 text-[14px]">
         <div className="flex w-full justify-between">
