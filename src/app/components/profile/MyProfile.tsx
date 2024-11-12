@@ -53,6 +53,7 @@ const MyProfile = () => {
         isOpen={isFollowingModalOpen}
         onClose={() => setIsFollowingModalOpen(false)}
         followingCount={profile.following}
+        tag={profile.tag}
       />
 
       {/* Follower List Modal */}

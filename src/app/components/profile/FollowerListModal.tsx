@@ -49,12 +49,12 @@ const FollowerListModal: React.FC<FollowerListModalProps> = ({
       setError(null);
       
       // 실제 API 연동 시에는 이 부분을 API 호출로 대체
-      // const response = await fetch(`/api/follows/followers?tag=${tag}`);
-      // const data = await response.json();
+      const response = await fetch(`/api/follows/followers?tag=${tag}`);
+      const data = await response.json();
       
       // 임시로 목업 데이터 사용
-      await new Promise(resolve => setTimeout(resolve, 500)); // 로딩 시뮬레이션
-      setFollowers(mockFollowers);
+      // await new Promise(resolve => setTimeout(resolve, 500)); // 로딩 시뮬레이션
+      // setFollowers(mockFollowers);
       
     } catch (err) {
       setError(err instanceof Error ? err.message : '팔로워 목록을 불러오는데 실패했습니다');
