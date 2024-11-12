@@ -22,3 +22,7 @@ const postRequest = async (url: string, req: Request, body: any = null) => {
 export const createPost = async (postData: FormData, authorTag: string, req: Request) => {
   return postRequest(`/api/posts/create?authorTag=${authorTag}`, req, postData);
 };
+
+export const followUser = async (data: any, req: Request) => {
+  return postRequest('/api/follows', req, data);
+};
