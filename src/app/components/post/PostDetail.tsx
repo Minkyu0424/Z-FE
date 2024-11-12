@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Icons from '../common/ui/Icons';
+import getRandomProfileImage from '@/app/utils/randomProfile';
 
 interface PostDetailProps {
   postId: string;
@@ -40,7 +41,7 @@ const PostDetail = ({ postId }: PostDetailProps) => {
       </div>
       <div className="flex items-center gap-x-2 px-2.5">
         <div className="w-10 h-10 relative">
-          <Image src={postData?.imageUrls[0] || '/mock/profile1.png'} alt="프로필" fill />
+          <Image src={getRandomProfileImage() || '/mock/profile1.png'} alt="프로필" fill />
         </div>
         <div className="text-sm">
           <p className="text-black font-semibold mb-0.5">{postData?.authorNickname}</p>
