@@ -21,16 +21,16 @@ const FollowingListModal: React.FC<FollowingListModalProps> = ({
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // 팔로잉 목록 가져오기
   const fetchFollowingList = useCallback(async () => {
     try {
       setIsLoading(true);
       setError(null);
       
-      const followingList = await fetchFollowings(tag);
-      setFollowingUsers(followingList);
+      const followingData = await fetchFollowings(tag);
+      setFollowingUsers(followingData);
       
     } catch (err) {
+      console.error('Error fetching following list:', err);
       setError(err instanceof Error ? err.message : '팔로잉 목록을 불러오는데 실패했습니다');
     } finally {
       setIsLoading(false);
@@ -41,20 +41,17 @@ const FollowingListModal: React.FC<FollowingListModalProps> = ({
   const handleUnfollow = async (userId: string) => {
     try {
       await unfollowUser(userId);
-      // 성공시 목록에서 제거
       setFollowingUsers(prev => prev.filter(user => user.id !== userId));
     } catch (err) {
       console.error('언팔로우 실패:', err);
-      // 에러 처리 (예: 토스트 메시지 표시)
+      setError(err instanceof Error ? err.message : '언팔로우에 실패했습니다');
     }
   };
 
-  // 모달이 열릴 때 데이터 가져오기
   useEffect(() => {
     if (isOpen && tag) {
       fetchFollowingList();
     } else {
-      // 모달이 닫힐 때 상태 초기화
       setFollowingUsers([]);
       setError(null);
     }
