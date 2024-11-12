@@ -17,7 +17,7 @@ const MainImages = ({ uploads, handleDeleteImage }: MainImagesProps) => {
             <img src={upload.preview} alt="preview" className="flex-1 h-40 object-cover rounded-xl" />
             <div
               onClick={() => handleDeleteImage(index)}
-              className="absolute top-1 left-1 bg-black bg-opacity-50 rounded-full w-6 h-6 flex-center"
+              className="absolute top-1 left-1 bg-black bg-opacity-50 rounded-full w-6 h-6 flex-center cursor-pointer"
             >
               <Icons name={closeIconSmall} />
             </div>
@@ -31,7 +31,7 @@ const MainImages = ({ uploads, handleDeleteImage }: MainImagesProps) => {
               <img src={upload.preview} alt="preview" className="flex-1 h-40 object-cover rounded-xl" />
               <div
                 onClick={() => handleDeleteImage(index)}
-                className="absolute top-1 left-1 bg-black bg-opacity-50 rounded-full w-6 h-6 flex-center"
+                className="absolute top-1 left-1 bg-black bg-opacity-50 rounded-full w-6 h-6 flex-center cursor-pointer"
               >
                 <Icons name={closeIconSmall} />
               </div>

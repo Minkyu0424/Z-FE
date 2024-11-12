@@ -11,7 +11,7 @@ const ChatPreviews = ({ chats }: ChatPreviewsProps) => {
     <div className="w-full flex flex-col items-center pt-5 gap-y-1.5">
       {chats.map((chat) => (
         <div className="flex w-full justify-between border-r border-r-black px-2.5 py-1.5 cursor-pointer hover:bg-main-4">
-          <div className='flex gap-x-2 items-center'>
+          <div className="flex gap-x-2 items-center">
             <div className="w-10 h-10 relative rounded-full">
               <Image src={chat.profile} alt={'profile'} className="rounded-full" fill />
             </div>
@@ -22,10 +22,10 @@ const ChatPreviews = ({ chats }: ChatPreviewsProps) => {
                 <Icons name={dotIcon} />
                 <p>{chat.createdAt}</p>
               </div>
-              <p className='text-xs'>{chat.preview}</p>
+              <p className="text-xs">{chat.preview}</p>
             </div>
           </div>
-          <Icons name={deleteIcon} className='cursor-pointer'/>
+          <Icons name={deleteIcon} className="cursor-pointer" />
         </div>
       ))}
     </div>

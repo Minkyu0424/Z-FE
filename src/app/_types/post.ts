@@ -15,3 +15,15 @@ interface UserTypes {
   nickname: string;
   userId: string;
 }
+
+interface PostDetailTypes {
+  id: string;
+  authorNickname: string;
+  authorTag: string;
+  content: string;
+  imageUrls: string[];
+  parentPostId: number | null;
+  quotePost: number | null;
+  childPosts: string[];
+  createdAt: string;
+}
