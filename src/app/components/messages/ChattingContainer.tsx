@@ -3,39 +3,100 @@
 import { backIcon, imageIconBlack, newChatIconSM } from '@/app/constants/iconPath';
 import { CHAT_PLACEHOLDER } from '@/app/constants/messages';
 import { mockUsers } from '@/app/data/mockUsers';
+import { Client } from '@stomp/stompjs';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { KeyboardEvent, useState } from 'react';
+import { KeyboardEvent, useEffect, useState } from 'react';
+import SockJS from 'sockjs-client';
 import Icons from '../common/ui/Icons';
 import Input from '../common/ui/Input';
 
 const ChattingContainer = () => {
-  const [messages, setMessages] = useState<ChatTypes[]>([{ sender: 'ohter', message: '안녕??', date: '11:23' }]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
+  const [client, setClient] = useState<Client | null>(null);
+  const router = useRouter();
+  const myTag = 'aaaa';
+  const otherTag = 'bbbb';
 
+  const getMessageStyle = (message: Message) => {
+    return message.senderTag === myTag;
+  };
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && !e.nativeEvent.isComposing) {
       handleSendMessage();
     }
   };
 
-  const handleSendMessage = () => {
-    if (inputValue.trim() !== '') {
-      const newMessage: ChatTypes = {
-        sender: 'me',
-        message: inputValue,
-        date: new Date().toLocaleTimeString('ko-KR', {
-          hour: '2-digit',
-          minute: '2-digit',
-          hour12: false,
-        }),
-      };
-      setMessages([...messages, newMessage]);
-      setInputValue('');
-    }
-  };
+  useEffect(() => {
+    const socket = new SockJS('http://localhost:8080/ws');
+    const stompClient = new Client({
+      webSocketFactory: () => socket,
+      connectHeaders: {
+        userTag: myTag,
+      },
+      debug: (str) => {
+        console.log(str);
+      },
+      reconnectDelay: 5000,
+      heartbeatIncoming: 4000,
+      heartbeatOutgoing: 4000,
+      onConnect: () => {
+        console.log('Connected!');
+        stompClient.subscribe(`/user/${myTag}/chat/private`, (message) => {
+          const receivedMessage = JSON.parse(message.body);
+          console.log('Received message:', receivedMessage);
 
-  const router = useRouter();
+          setMessages((prev) => {
+            const exists = prev.some((msg) => msg.id === receivedMessage.id);
+            if (!exists) {
+              return [...prev, receivedMessage];
+            }
+            return prev;
+          });
+        });
+
+        stompClient.subscribe(`/user/${myTag}/chat/read-receipt`, (message) => {
+          const updatedMessage = JSON.parse(message.body);
+          console.log('Read receipt:', updatedMessage);
+          setMessages((prev) => prev.map((msg) => (msg.id === updatedMessage.id ? updatedMessage : msg)));
+        });
+      },
+      onDisconnect: () => {
+        console.log('Disconnected!');
+      },
+      onStompError: (frame) => {
+        console.error('Broker reported error: ' + frame.headers['message']);
+        console.error('Additional details: ' + frame.body);
+      },
+    });
+
+    stompClient.activate();
+    setClient(stompClient);
+
+    return () => {
+      if (stompClient) {
+        stompClient.deactivate();
+      }
+    };
+  }, []);
+
+  const handleSendMessage = () => {
+    if (!client || !inputValue.trim()) return;
+
+    const message = {
+      content: inputValue,
+      senderTag: myTag,
+      receiverTag: otherTag,
+    };
+
+    client.publish({
+      destination: `/app/private-message/${otherTag}`,
+      body: JSON.stringify(message),
+    });
+
+    setInputValue('');
+  };
 
   return (
     <div className="flex-1 flex flex-col gap-y-5 pt-4 px-3 h-screen relative">
@@ -55,15 +116,15 @@ const ChattingContainer = () => {
       </div>
       <div className="flex flex-col h-full justify-between pb-4 items-end overflow-y-auto">
         <div className="w-full rounded-lg p-2 gap-y-[14px] flex-col flex overflow-y-auto">
-          {messages.map((item, index) => (
+          {messages.map((msg, index) => (
             <div
               key={index}
               className={`inline-flex px-4 py-2 text-white rounded-md text-sm relative mb-0.5 ${
-                item.sender === 'me' ? 'bg-blue-500 self-end' : 'bg-gray-500 self-start'
+                getMessageStyle(msg) ? 'bg-blue-500 self-end' : 'bg-gray-500 self-start'
               }`}
             >
-              {item.message}
-              <p className="absolute top-8 right-1 text-[10px] h-1 text-main-0">{item.date}</p>
+              {msg.content}
+              <p className="absolute top-8 right-1 text-[10px] h-1 text-main-0">{msg.sentAt}</p>
             </div>
           ))}
         </div>

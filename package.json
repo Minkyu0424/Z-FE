@@ -12,6 +12,8 @@
     "lint:fix": "eslint --fix './src/**/*.{ts,tsx,js,jsx}'"
   },
   "dependencies": {
+    "@stomp/stompjs": "^7.0.0",
+    "@types/sockjs-client": "^1.5.4",
     "cookie": "^1.0.1",
     "dotenv": "^16.4.5",
     "lucide-react": "^0.454.0",
