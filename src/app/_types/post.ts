@@ -17,7 +17,7 @@ interface UserTypes {
 }
 
 interface PostDetailTypes {
-  id: number;
+  id: string;
   authorNickname: string;
   authorTag: string;
   content: string;

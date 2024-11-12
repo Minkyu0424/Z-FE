@@ -19,3 +19,8 @@ export const getPost = async (req: Request, postId: string) => {
   const url = `/api/posts/${postId}`;
   return getRequest(url, req);
 };
+
+export const getAllPosts = async (req: Request, tag: string) => {
+  const url = `/api/posts/posts?currentMemberTag=${tag}`;
+  return getRequest(url, req);
+};
