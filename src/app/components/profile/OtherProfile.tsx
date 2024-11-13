@@ -33,7 +33,7 @@ const OtherProfile = () => {
 
   const userPosts = mockPosts.filter((post) => post.userId === 'user2');
 
-  
+
   return (
     <div className="min-h-screen bg-white">
       {/* Modals */}
@@ -67,22 +67,10 @@ const OtherProfile = () => {
           {/* Profile image placeholder */}
           <div className="w-24 h-24 rounded-full bg-gray-300"></div>
           <div className="flex gap-2">
-            <button
-              onClick={() => {}}
-              className="p-2 rounded-full hover:bg-gray-200"
-              title="Send Message"
-            >
+            <button onClick={() => { }} className="p-2 rounded-full hover:bg-gray-200" title="Send Message">
               <DMIcon />
             </button>
-            <button
-              
-              className={`px-4 py-2 rounded-full font-bold
-                ${isFollowing
-                  ? 'border border-gray-300 hover:border-red-300 hover:text-red-600 hover:bg-red-50'
-                  : 'bg-black text-white hover:bg-gray-800'}`}
-            >
-              {isFollowing ? '팔로잉' : '팔로우'}
-            </button>
+            <button className="px-4 py-2 bg-black text-white rounded-full font-bold hover:bg-gray-800">Follow</button>
           </div>
         </div>
 
@@ -94,18 +82,12 @@ const OtherProfile = () => {
         <p className="mb-4">{profile.bio}</p>
 
         <div className="flex gap-4 text-sm">
-          <button
-            onClick={() => setIsFollowingModalOpen(true)}
-            className="hover:underline"
-          >
+        <span>
             <strong>{profile.following}</strong> Following
-          </button>
-          <button
-            onClick={() => setIsFollowerModalOpen(true)}
-            className="hover:underline"
-          >
+          </span>
+          <span>
             <strong>{profile.followers}</strong> Followers
-          </button>
+          </span>
         </div>
       </div>
 
