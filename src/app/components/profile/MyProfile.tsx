@@ -23,10 +23,16 @@ const MyProfile = () => {
   const [isFollowingModalOpen, setIsFollowingModalOpen] = useState(false);
   const [isFollowerModalOpen, setIsFollowerModalOpen] = useState(false);
 
+  const createTagFromHandle = (handle: string): string => {
+    return handle.replace('@', '');
+  };
+
+  const initialHandle = '@Warren_Buffett';
+  
   const [profile, setProfile] = useState<Profile>({
     username: "투자초보",
-    handle: "@Warren_Buffett",
-    tag: "Warren_Buffett",
+    handle: initialHandle,
+    tag: createTagFromHandle(initialHandle),
     bio: "좋은 펀드매니져가 되도록 노력중인 사람이에요.",
     following: 800,
     followers: 1232,
@@ -35,11 +41,18 @@ const MyProfile = () => {
   const myPosts = mockPosts.filter((post) => post.userId === 'user1');
 
   const handleProfileUpdate = (updatedProfile: Partial<Profile>) => {
-    setProfile(prev => ({ ...prev, ...updatedProfile }));
+    setProfile(prev => {
+      const newProfile = { ...prev, ...updatedProfile };
+      // handle이 업데이트되면 tag도 자동으로 업데이트
+      if (updatedProfile.handle) {
+        newProfile.tag = createTagFromHandle(updatedProfile.handle);
+      }
+      return newProfile;
+    });
   };
 
   return (
-    <div className="max-w-2xl mx-auto bg-white">
+    <div className="max-w-2xl mx-auto bg-white h-screen">
       <EditProfileModal
         isOpen={isEditModalOpen}
         onClose={() => setIsEditModalOpen(false)}
