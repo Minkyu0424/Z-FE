@@ -23,10 +23,10 @@ const OtherProfile = () => {
   const [isFollowing, setIsFollowing] = useState(false);
 
   const profile = {
-    username: "재테크러",
-    handle: "@boodong",
-    tag: "boodong",
-    bio: "좋은 부동산투자자가 되도록 노력중인 사람이에요.",
+    username: '재테크러',
+    handle: '@boodong',
+    tag: 'boodong',
+    bio: '좋은 부동산투자자가 되도록 노력중인 사람이에요.',
     following: 800,
     followers: 1232,
   };
