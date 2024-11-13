@@ -27,3 +27,7 @@ interface PostDetailTypes {
   childPosts: string[];
   createdAt: string;
 }
+
+interface UserTagTypes {
+  tag: string;
+}
