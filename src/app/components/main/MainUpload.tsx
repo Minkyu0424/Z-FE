@@ -44,8 +44,8 @@ const MainUpload = () => {
   return (
     <div className="flex flex-col border-b-main-2 border-b px-3 pb-2.5">
       <div className="flex gap-x-2.5">
-        <div className="w-8 h-8 relative">
-          <Image className="w-8 h-8 relative mr-3" src="/mock/profile1.png" alt="profile" fill />
+        <div className="w-8 h-8 relative rounded-full">
+          <Image className="w-8 h-8 relative mr-3 rounded-full" src="/mock/default.webp" alt="profile" fill />
         </div>
         <textarea
           ref={contentInputRef}
