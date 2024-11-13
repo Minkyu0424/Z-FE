@@ -11,7 +11,7 @@ const MainContainer = () => {
   useEffect(() => {
     const fetchPostDetail = async () => {
       try {
-        const resData = await callGet(`/api/mainPosts?tag=${'callmeZ'}`);
+        const resData = await callGet(`/api/mainPosts?tag=${'abc123'}`);
         setPostDatas(resData.data);
       } catch (error) {
         console.error('Error fetching post details:', error);

@@ -71,7 +71,7 @@ const PostDetail = ({ postId }: PostDetailProps) => {
         ))}
       </div>
       <div className="flex text-sm items-center gap-2 text-main-1 pl-3">
-        <p>{formatDate(postData?.createdAt)}</p>
+        <p>{formatDate(postData?.createdAt || '2024.11.11')}</p>
         <Icons name={dotIcon} />
         <p className="font-semibold">24M View</p>
       </div>

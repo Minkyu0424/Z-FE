@@ -14,8 +14,6 @@ export async function callPost(url: string, body?: FormData | any) {
     body: body instanceof FormData ? body : JSON.stringify(body),
   };
   if (!(body instanceof FormData)) {
-    console.log('json형식');
-    
     options.headers = { 'Content-Type': 'application/json' };
   }
   const response = await fetch(url, options);

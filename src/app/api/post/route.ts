@@ -7,7 +7,7 @@ import { NextResponse } from 'next/server';
 export async function POST(req: Request) {
   const formData = await req.formData();
 
-  const response = await createPost(formData, 'callmeZ', req);
+  const response = await createPost(formData, req);
   return NextResponse.json(response);
 }
 
