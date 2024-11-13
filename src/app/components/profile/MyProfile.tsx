@@ -29,10 +29,10 @@ const MyProfile = () => {
     tag: "Warren_Buffett",
     bio: "좋은 펀드매니져가 되도록 노력중인 사람이에요.",
     following: 800,
-    followers: 1232
+    followers: 1232,
   });
 
-  const myPosts = mockPosts.filter(post => post.userId === 'user1');
+  const myPosts = mockPosts.filter((post) => post.userId === 'user1');
 
   const handleProfileUpdate = (updatedProfile: Partial<Profile>) => {
     setProfile(prev => ({ ...prev, ...updatedProfile }));
@@ -40,7 +40,6 @@ const MyProfile = () => {
 
   return (
     <div className="max-w-2xl mx-auto bg-white">
-      {/* Edit Profile Modal */}
       <EditProfileModal
         isOpen={isEditModalOpen}
         onClose={() => setIsEditModalOpen(false)}
@@ -48,7 +47,6 @@ const MyProfile = () => {
         onUpdate={(form) => handleProfileUpdate(form)}
       />
 
-      {/* Following List Modal */}
       <FollowingListModal
         isOpen={isFollowingModalOpen}
         onClose={() => setIsFollowingModalOpen(false)}
@@ -56,12 +54,11 @@ const MyProfile = () => {
         tag={profile.tag}
       />
 
-      {/* Follower List Modal */}
       <FollowerListModal
         isOpen={isFollowerModalOpen}
         onClose={() => setIsFollowerModalOpen(false)}
         followerCount={profile.followers}
-        tag={profile.tag}  // tag 속성 추가
+        tag={profile.tag}
       />
 
       {/* Header */}
