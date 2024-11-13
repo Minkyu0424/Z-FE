@@ -1,5 +1,6 @@
 'use client';
 
+import { useUserStore } from '@/app/store/store';
 import { callGet } from '@/app/utils/callApi';
 import { useEffect, useState } from 'react';
 import MainNoPost from './MainNoPost';
@@ -8,11 +9,12 @@ import MainUpload from './MainUpload';
 
 const MainContainer = () => {
   const [postDatas, setPostDatas] = useState<PostDetailTypes[] | null>(null);
+  const { user } = useUserStore();
 
   useEffect(() => {
     const fetchPostDetail = async () => {
       try {
-        const resData = await callGet(`/api/mainPosts?tag=${'abc123'}`);
+        const resData = await callGet(`/api/mainPosts?tag=${'000424'}`);
         setPostDatas(resData.data);
       } catch (error) {
         console.error('Error fetching post details:', error);
@@ -27,7 +29,7 @@ const MainContainer = () => {
       {postDatas?.length === 0 ? (
         <MainNoPost />
       ) : (
-        <div className="flex flex-col gap-y-2.5 h-screen overflow-y-auto pt-2.5">
+        <div className="flex flex-col w-full gap-y-2.5 h-screen overflow-y-auto pt-2.5">
           {postDatas?.map((post, i) => <MainPost post={post} />)}
         </div>
       )}
