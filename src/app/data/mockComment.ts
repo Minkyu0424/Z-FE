@@ -1,0 +1,33 @@
+export const mockComments: CommentTypes[] = [
+  {
+    profile: '/mock/profile2.png',
+    userId: 'user1',
+    nickname: '투자초보',
+    tag: '주식',
+    createdAt: '2024-11-01',
+    content: `오늘 처음으로 주식에 투자했어요! 저도 주식 투자하면서 생기는 생각이나 팁도 공유할게요. 함께 성장해봐요!`,
+    totalLikes: 23,
+    totalComment: 5,
+    files: [],
+  },
+  {
+    profile: '/mock/profile3.png',
+    userId: 'user2',
+    nickname: '경제학도',
+    createdAt: '2024-11-02',
+    content: `경제 공부를 하면서 주식 투자의 중요성을 더 깨닫게 되었어요. 장기 투자에 대한 다양한 의견을 나누고 싶어요!`,
+    totalLikes: 15,
+    totalComment: 3,
+    files: ['/mock/content2.png'],
+  },
+  {
+    profile: '/mock/profile1.png',
+    userId: 'user3',
+    nickname: '부동산꿈나무',
+    createdAt: '2024-11-03',
+    content: `부동산에 관심이 많아요! 부동산 투자 관련 정보도 함께 공유할게요. 서로 도움 되는 정보를 주고받았으면 좋겠어요.`,
+    totalLikes: 30,
+    totalComment: 7,
+    files: ['/mock/content3.jpeg', '/mock/content2.png'],
+  },
+];

@@ -1,8 +1,6 @@
-import LoginGetNicknameTag from "@/app/components/auth/LoginGetNicknameTag";
-const signUp = () =>{
-    return(
-         <LoginGetNicknameTag/>
-    );
-}
+import LoginGetNicknameTag from '@/app/components/auth/LoginGetNicknameTag';
+const signUp = () => {
+  return <LoginGetNicknameTag />;
+};
 
 export default signUp;

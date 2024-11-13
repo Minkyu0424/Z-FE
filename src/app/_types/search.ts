@@ -1,0 +1,1 @@
+type SearchTypes = 'POST' | 'PEOPLE';

@@ -12,15 +12,12 @@ const config: Config = {
         pretendard: ['var(--font-pretendard)'],
       },
       colors: {
-        background: 'var(--background)',
-        foreground: 'var(--foreground)',
-        colors: {
-          main: {
-            0: '#333333',
-            1: '#7C7C7C',
-            2: '#CFCFCF',
-            3: '#EDEDED',
-          },
+        main: {
+          0: '#333333',
+          1: '#7C7C7C',
+          2: '#CBCACA',
+          3: '#CFCFCF',
+          4: '#EDEDED',
         },
       },
     },

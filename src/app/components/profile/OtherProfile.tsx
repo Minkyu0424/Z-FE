@@ -25,14 +25,15 @@ const OtherProfile = () => {
   const profile = {
     username: '재테크러',
     handle: '@boodong',
+
     tag: 'boodong',
+
     bio: '좋은 부동산투자자가 되도록 노력중인 사람이에요.',
     following: 800,
     followers: 1232,
   };
 
   const userPosts = mockPosts.filter((post) => post.userId === 'user2');
-
 
   return (
     <div className="min-h-screen bg-white">
@@ -68,6 +69,7 @@ const OtherProfile = () => {
           <div className="w-24 h-24 rounded-full bg-gray-300"></div>
           <div className="flex gap-2">
             <button onClick={() => { }} className="p-2 rounded-full hover:bg-gray-200" title="Send Message">
+
               <DMIcon />
             </button>
             <button className="px-4 py-2 bg-black text-white rounded-full font-bold hover:bg-gray-800">Follow</button>
@@ -82,6 +84,7 @@ const OtherProfile = () => {
         <p className="mb-4">{profile.bio}</p>
 
         <div className="flex gap-4 text-sm">
+
         <span>
             <strong>{profile.following}</strong> Following
           </span>

@@ -2,11 +2,11 @@
 import React from 'react';
 import { X } from 'lucide-react';
 
-const EditProfileModal = ({ 
-  isOpen, 
-  onClose, 
-  profile, 
-  onUpdate 
+const EditProfileModal = ({
+  isOpen,
+  onClose,
+  profile,
+  onUpdate,
 }: {
   isOpen: boolean;
   onClose: () => void;
@@ -39,12 +39,10 @@ const EditProfileModal = ({
             저장
           </button>
         </div>
-        
+
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              이름
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">이름</label>
             <input
               type="text"
               value={editForm.username}
@@ -53,9 +51,7 @@ const EditProfileModal = ({
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              소개
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">소개</label>
             <textarea
               value={editForm.bio}
               onChange={(e) => setEditForm({ ...editForm, bio: e.target.value })}
