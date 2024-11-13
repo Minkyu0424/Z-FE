@@ -1,3 +1,4 @@
+import PostTypes from "@/app/_types/main/PostTypes";
 export const mockPosts: PostTypes[] = [
   {
     profile: '/mock/profile2.png',

@@ -1,9 +1,12 @@
 'use client';
-import React from 'react';
+
+import React, { useState } from 'react';
 import { ArrowLeft, MoreHorizontal } from 'lucide-react';
 import Link from 'next/link';
 import MainPost from '../main/MainPost';
 import { mockPosts } from '@/app/data/mockPost';
+import FollowingListModal from './FollowingListModal';
+import FollowerListModal from './FollowerListModal';
 
 const DMIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -15,9 +18,16 @@ const DMIcon = () => (
 );
 
 const OtherProfile = () => {
+  const [isFollowingModalOpen, setIsFollowingModalOpen] = useState(false);
+  const [isFollowerModalOpen, setIsFollowerModalOpen] = useState(false);
+  const [isFollowing, setIsFollowing] = useState(false);
+
   const profile = {
     username: '재테크러',
     handle: '@boodong',
+
+    tag: 'boodong',
+
     bio: '좋은 부동산투자자가 되도록 노력중인 사람이에요.',
     following: 800,
     followers: 1232,
@@ -27,13 +37,28 @@ const OtherProfile = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Modals */}
+      <FollowingListModal
+        isOpen={isFollowingModalOpen}
+        onClose={() => setIsFollowingModalOpen(false)}
+        followingCount={profile.following}
+        tag={profile.tag}
+      />
+
+      <FollowerListModal
+        isOpen={isFollowerModalOpen}
+        onClose={() => setIsFollowerModalOpen(false)}
+        followerCount={profile.followers}
+        tag={profile.tag}
+      />
+
       {/* Header */}
       <div className="sticky top-0 z-10 bg-white/80 backdrop-blur-md">
         <div className="flex items-center p-4">
           <Link href="/" className="rounded-full hover:bg-gray-200 p-2">
             <ArrowLeft size={20} />
           </Link>
-          <h1 className="text-xl font-bold">Profile</h1>
+          <h1 className="text-xl font-bold ml-4">Profile</h1>
         </div>
       </div>
 
@@ -43,7 +68,8 @@ const OtherProfile = () => {
           {/* Profile image placeholder */}
           <div className="w-24 h-24 rounded-full bg-gray-300"></div>
           <div className="flex gap-2">
-            <button onClick={() => {}} className="p-2 rounded-full hover:bg-gray-200" title="Send Message">
+            <button onClick={() => { }} className="p-2 rounded-full hover:bg-gray-200" title="Send Message">
+
               <DMIcon />
             </button>
             <button className="px-4 py-2 bg-black text-white rounded-full font-bold hover:bg-gray-800">Follow</button>
@@ -58,7 +84,8 @@ const OtherProfile = () => {
         <p className="mb-4">{profile.bio}</p>
 
         <div className="flex gap-4 text-sm">
-          <span>
+
+        <span>
             <strong>{profile.following}</strong> Following
           </span>
           <span>
