@@ -33,10 +33,7 @@ const OtherProfile = () => {
 
   const userPosts = mockPosts.filter((post) => post.userId === 'user2');
 
-  const handleToggleFollow = () => {
-    setIsFollowing(!isFollowing);
-  };
-
+  
   return (
     <div className="min-h-screen bg-white">
       {/* Modals */}
@@ -78,7 +75,7 @@ const OtherProfile = () => {
               <DMIcon />
             </button>
             <button
-              onClick={handleToggleFollow}
+              
               className={`px-4 py-2 rounded-full font-bold
                 ${isFollowing
                   ? 'border border-gray-300 hover:border-red-300 hover:text-red-600 hover:bg-red-50'
