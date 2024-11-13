@@ -1,4 +1,4 @@
-const SERVER_URL = process.env.NEXT_PUBLIC_SERVER || "http://43.203.123.147:8080";
+const SERVER_URL = process.env.NEXT_PUBLIC_SERVER ;
 
 export interface Following {
   id: string;
