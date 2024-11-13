@@ -1,13 +1,21 @@
 'use client';
 
 import { SIDEBAR_ICONS, SIDEBAR_ICONS_SELECTED, SIDEBAR_PATHS } from '@/app/constants/common';
+import { logoutIcon } from '@/app/constants/iconPath';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import Icons from '../ui/Icons';
 
 const SideBar = () => {
   const pathname = usePathname();
+  const router = useRouter();
+  const handleLogout = async () => {
+    const res = await fetch('/api/logout');
+
+    const data = await res.json();
+    router.push('/login');
+  };
 
   return (
     <div className="w-16 h-min-screen flex-col-center pt-6 gap-y-10 border-r border-r-main-2">
@@ -24,6 +32,7 @@ const SideBar = () => {
             />
           </Link>
         ))}
+        <Icons name={logoutIcon} onClick={handleLogout} className="cursor-pointer" />
       </div>
     </div>
   );
