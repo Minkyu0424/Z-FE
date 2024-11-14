@@ -11,7 +11,8 @@ interface SearchPeopleProps {
 
 const SearchPeople = ({ user, setText }: SearchPeopleProps) => {
   const [isFollowing, setIsFollowing] = useState(false);
-  const router = useRouter();
+  console.log(user);
+  
 
   const followUser = async () => {
     const response = await callPost('/api/follow', { tag: user.tag });

@@ -4,7 +4,6 @@ import { dotIcon, postLikeIconSM } from '@/app/constants/iconPath';
 import { POST_COMMENT_PLACEHOLDER } from '@/app/constants/post';
 import { callGet, callPost } from '@/app/utils/callApi';
 import { getHM } from '@/app/utils/date';
-import { getRandomProfileImage } from '@/app/utils/randomProfile';
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
 import Button from '../common/ui/Button';
@@ -18,7 +17,6 @@ interface CommentContainerProps {
 const CommentContainer = ({ postId }: CommentContainerProps) => {
   const [postData, setPostData] = useState<PostDetailTypes[]>([]);
   const [text, setText] = useState('');
-  const profile = getRandomProfileImage();
   const fetchPostDetail = useCallback(async () => {
     try {
       const resData = await callGet(`/api/post?id=${postId}`);
@@ -49,8 +47,8 @@ const CommentContainer = ({ postId }: CommentContainerProps) => {
   return (
     <div className="w-full flex flex-col px-3">
       <div className="py-1 px-3 rounded-xl flex border border-[#cecece] items-center justify-between">
-        <div className="w-8 h-8 relative">
-          <Image src={profile} alt="profile" fill />
+        <div className="w-8 h-8 relative rounded-full">
+          <Image src={'/mock/default.webp'} alt="profile" fill className="rounded-full" />
         </div>
         <Input
           type={'comment'}
@@ -65,7 +63,7 @@ const CommentContainer = ({ postId }: CommentContainerProps) => {
           postData?.map((post, i) => (
             <div className="w-full px-2.5 pb-3 flex border-b border-main-2 gap-x-[14px]">
               <div className="w-8 h-8 relative rounded-full">
-                <Image src={profile} alt="profile" fill className="rounded-full" />
+                <Image src={'/mock/default.webp'} alt="profile" fill className="rounded-full" />
               </div>
               <div className="flex flex-col text-xs gap-y-1.5">
                 <div className="flex items-center gap-x-1 text-main-1">

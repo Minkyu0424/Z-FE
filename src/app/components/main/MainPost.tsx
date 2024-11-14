@@ -31,7 +31,7 @@ const MainPost = ({ post, onNewPost }: MainPostProps) => {
         <Image src={'/mock/default.webp'} alt="프로필" fill className="rounded-full" />
       </div>
       <div className="w-full flex flex-col gap-y-2 px-2.5 text-[14px]">
-        <div className="flex w-full justify-between">
+        <div className="flex justify-between">
           <div className="flex items-center gap-x-1 text-main-1">
             <p className="text-black font-semibold">{post.authorNickname}</p>
             <p>@{post.authorTag}</p>
