@@ -12,9 +12,10 @@ import Repost from './Repost';
 interface RepostModalProps {
   post: PostDetailTypes;
   closeModal: () => void;
+  onNewPost: () => Promise<void>;
 }
 
-const RepostModal = ({ post, closeModal }: RepostModalProps) => {
+const RepostModal = ({ post, closeModal, onNewPost }: RepostModalProps) => {
   const contentInputRef = useRef<HTMLTextAreaElement | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [files, setFiles] = useState<ImageFileTypes[]>([]);
@@ -53,6 +54,7 @@ const RepostModal = ({ post, closeModal }: RepostModalProps) => {
     if (contentInputRef.current) {
       contentInputRef.current.value = '';
     }
+    onNewPost();
   };
 
   return (

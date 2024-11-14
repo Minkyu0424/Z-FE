@@ -15,7 +15,7 @@ interface MainUploadProps {
 }
 
 const MainUpload = ({ onNewPost }: MainUploadProps) => {
-  const { files, fileInputRef, handleImageChange, handleIconClick, handleDeleteImage } = useImageUpload();
+  const { files, setFiles, fileInputRef, handleImageChange, handleIconClick, handleDeleteImage } = useImageUpload();
   const { contentInputRef, handleResize } = useAutoResize();
 
   const handleSubmit = async () => {
@@ -41,6 +41,7 @@ const MainUpload = ({ onNewPost }: MainUploadProps) => {
     await callPost('/api/post', formData);
 
     if (contentInputRef.current) {
+      setFiles([])
       contentInputRef.current.value = '';
     }
     onNewPost();

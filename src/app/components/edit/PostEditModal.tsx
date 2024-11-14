@@ -1,5 +1,5 @@
 import { closeIconSmall, ImageIconBig } from '@/app/constants/iconPath';
-import { EDIT_TITLE, REPOST_PLACEHOLDER, REPOST_TITLE } from '@/app/constants/post';
+import { EDIT_TITLE, REPOST_PLACEHOLDER } from '@/app/constants/post';
 import { useAutoResize } from '@/app/hooks/useAutoResize';
 import { useImageUpload } from '@/app/hooks/useIamgeUpload';
 import { callGet, callPatch } from '@/app/utils/callApi';
@@ -13,9 +13,10 @@ import Repost from '../post/Repost';
 interface PostEditModalProps {
   postId: string;
   closeModal: () => void;
+  onNewPost: () => Promise<void>;
 }
 
-const PostEditModal = ({ postId, closeModal }: PostEditModalProps) => {
+const PostEditModal = ({ postId, closeModal, onNewPost }: PostEditModalProps) => {
   const { files, fileInputRef, handleImageChange, handleIconClick, handleDeleteImage } = useImageUpload();
   const { contentInputRef, handleResize } = useAutoResize();
   const [postData, setPostData] = useState<PostDetailTypes | null>(null);
@@ -56,7 +57,7 @@ const PostEditModal = ({ postId, closeModal }: PostEditModalProps) => {
     });
 
     await callPatch(`/api/post/?id=${postId}&tag=${postData?.authorTag}`, formData);
-
+    onNewPost();
     closeModal();
 
     if (contentInputRef.current) {

@@ -12,18 +12,25 @@ import RepostModal from '../post/RepostModal';
 
 interface MainPostProps {
   post: PostDetailTypes;
+  onNewPost: () => Promise<void>;
 }
 
-const MainPost = ({ post }: MainPostProps) => {
+const MainPost = ({ post, onNewPost }: MainPostProps) => {
   const { isOpen: isOpenEdit, openModal: openEdit, closeModal: closeEdit } = useModal(false);
   const { isOpen: isOpenDel, openModal: openDel, closeModal: closeDel } = useModal(false);
   const { isOpen: isOpenRe, openModal: openRe, closeModal: closeRe } = useModal(false);
 
   return (
     <div className="flex px-3 w-full border-b border-b-main-2 pb-2.5">
-      {isOpenEdit && <PostEditModal postId={post.id} closeModal={closeEdit} />}
-      {isOpenDel && <PostDeleteModal postId={post.id} closeModal={closeDel} />}
-      {isOpenRe && <RepostModal post={post} closeModal={closeRe} />}
+      {isOpenEdit && <PostEditModal postId={post.id} closeModal={closeEdit} onNewPost={onNewPost} />}
+      {isOpenDel && <PostDeleteModal postId={post.id} closeModal={closeDel} onNewPost={onNewPost} />}
+      {isOpenRe && (
+        <RepostModal
+          post={post}
+          closeModal={closeRe}
+          onNewPost={onNewPost}
+        />
+      )}
       <div className="w-8 h-8 relative rounded-full">
         <Image src={'/mock/default.webp'} alt="프로필" fill className="rounded-full" />
       </div>
