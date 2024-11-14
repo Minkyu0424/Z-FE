@@ -30,3 +30,4 @@ interface SearchUserTypes {
   introduction: string | null;
   profilePicture: string | null;
 }
+

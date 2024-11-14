@@ -34,3 +34,13 @@ export const getTag = async (req: Request) => {
   const url = '/api/members/my-tag';
   return getRequest(url, req);
 };
+
+export const getFollowers = async (req: Request, tag: string) => {
+  const url = `/api/follows/followers?tag=${tag}`;
+  return getRequest(url, req);
+};
+
+export const getFollowing = async (req: Request, tag: string) => {
+  const url = `/api/follows/followings?tag=${tag}`;
+  return getRequest(url, req);
+};

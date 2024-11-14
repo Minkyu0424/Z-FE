@@ -1,22 +1,8 @@
 // EditProfileModal.js
-import React from 'react';
 import { X } from 'lucide-react';
 
-const EditProfileModal = ({
-  isOpen,
-  onClose,
-  profile,
-  onUpdate,
-}: {
-  isOpen: boolean;
-  onClose: () => void;
-  profile: { username: string; bio: string };
-  onUpdate: (form: { username: string; bio: string }) => void;
-}) => {
-  const [editForm, setEditForm] = React.useState({ ...profile });
-
+const EditProfileModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   const handleProfileUpdate = () => {
-    onUpdate(editForm);
     onClose();
   };
 
