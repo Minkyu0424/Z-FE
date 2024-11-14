@@ -3,99 +3,33 @@
 import { backIcon, imageIconBlack, newChatIconSM } from '@/app/constants/iconPath';
 import { CHAT_PLACEHOLDER } from '@/app/constants/messages';
 import { mockUsers } from '@/app/data/mockUsers';
-import { Client } from '@stomp/stompjs';
+import { useWebSocket } from '@/app/hooks/useWebSocket';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { KeyboardEvent, useEffect, useState } from 'react';
-import SockJS from 'sockjs-client';
+import { KeyboardEvent, useState } from 'react';
 import Icons from '../common/ui/Icons';
 import Input from '../common/ui/Input';
 
 const ChattingContainer = () => {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const userTag = 'aaaa';
+  const otherTag = 'aaaa';
+  const { messages, sendMessage } = useWebSocket(userTag, otherTag);
   const [inputValue, setInputValue] = useState('');
-  const [client, setClient] = useState<Client | null>(null);
   const router = useRouter();
-  const myTag = 'aaaa';
-  const otherTag = 'bbbb';
 
-  const getMessageStyle = (message: Message) => {
-    return message.senderTag === myTag;
+  const handleSendMessage = () => {
+    sendMessage(`/app/private-message/${'bbbb'}`, inputValue);
+    setInputValue('');
   };
+
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && !e.nativeEvent.isComposing) {
       handleSendMessage();
     }
   };
 
-  useEffect(() => {
-    const socket = new SockJS('http://localhost:8080/ws');
-    const stompClient = new Client({
-      webSocketFactory: () => socket,
-      connectHeaders: {
-        userTag: myTag,
-      },
-      debug: (str) => {
-        console.log(str);
-      },
-      reconnectDelay: 5000,
-      heartbeatIncoming: 4000,
-      heartbeatOutgoing: 4000,
-      onConnect: () => {
-        console.log('Connected!');
-        stompClient.subscribe(`/user/${myTag}/chat/private`, (message) => {
-          const receivedMessage = JSON.parse(message.body);
-          console.log('Received message:', receivedMessage);
-
-          setMessages((prev) => {
-            const exists = prev.some((msg) => msg.id === receivedMessage.id);
-            if (!exists) {
-              return [...prev, receivedMessage];
-            }
-            return prev;
-          });
-        });
-
-        stompClient.subscribe(`/user/${myTag}/chat/read-receipt`, (message) => {
-          const updatedMessage = JSON.parse(message.body);
-          console.log('Read receipt:', updatedMessage);
-          setMessages((prev) => prev.map((msg) => (msg.id === updatedMessage.id ? updatedMessage : msg)));
-        });
-      },
-      onDisconnect: () => {
-        console.log('Disconnected!');
-      },
-      onStompError: (frame) => {
-        console.error('Broker reported error: ' + frame.headers['message']);
-        console.error('Additional details: ' + frame.body);
-      },
-    });
-
-    stompClient.activate();
-    setClient(stompClient);
-
-    return () => {
-      if (stompClient) {
-        stompClient.deactivate();
-      }
-    };
-  }, []);
-
-  const handleSendMessage = () => {
-    if (!client || !inputValue.trim()) return;
-
-    const message = {
-      content: inputValue,
-      senderTag: myTag,
-      receiverTag: otherTag,
-    };
-
-    client.publish({
-      destination: `/app/private-message/${otherTag}`,
-      body: JSON.stringify(message),
-    });
-
-    setInputValue('');
+  const getMessageStyle = (message: Message) => {
+    return message.senderTag === userTag;
   };
 
   return (
