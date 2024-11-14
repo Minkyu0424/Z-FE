@@ -30,6 +30,11 @@ export const getMember = async (req: Request, tag: string) => {
   return getRequest(url, req);
 };
 
+export const getSearchMember = async (req: Request, tag: string) => {
+  const url = `/api/members/search?tag=${tag}`;
+  return getRequest(url, req);
+};
+
 export const getTag = async (req: Request) => {
   const url = '/api/members/my-tag';
   return getRequest(url, req);

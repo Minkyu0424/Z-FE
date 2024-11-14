@@ -1,4 +1,4 @@
-import { getMember } from '@/app/service/getRequest';
+import { getSearchMember } from '@/app/service/getRequest';
 import { NextResponse } from 'next/server';
 
 export async function GET(req: Request) {
@@ -6,8 +6,7 @@ export async function GET(req: Request) {
 
   const tag = searchParams.get('tag') || '';
 
-  const response = await getMember(req, tag);
-  console.log(response, '검색 응답');
+  const response = await getSearchMember(req, tag);
 
   return NextResponse.json(response);
 }

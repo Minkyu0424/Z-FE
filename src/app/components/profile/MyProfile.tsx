@@ -10,15 +10,6 @@ import MainPost from '../main/MainPost';
 import FollowerListModal from './FollowerListModal';
 import FollowingListModal from './FollowingListModal';
 
-interface Profile {
-  username: string;
-  handle: string;
-  tag: string;
-  bio: string;
-  following: number;
-  followers: number;
-}
-
 const MyProfile = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isFollowingModalOpen, setIsFollowingModalOpen] = useState(false);
@@ -55,8 +46,6 @@ const MyProfile = () => {
     fetchFollower();
     fetchFollowing();
   }, [fetchPosts]);
-
-  console.log(followers, followings, '가져온 팔로워와 팔로잉 내역');
 
   return (
     <div className="w-full max-w-2xl mx-auto bg-white h-screen overflow-y-auto">

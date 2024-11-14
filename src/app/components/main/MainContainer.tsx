@@ -22,7 +22,7 @@ const MainContainer = () => {
 
   useEffect(() => {
     fetchPostDetail();
-  }, [fetchPostDetail]);
+  }, [fetchPostDetail, user]);
 
   return (
     <div className="flex-1 pt-6 flex-col-center h-screen w-full overflow-y-auto">
