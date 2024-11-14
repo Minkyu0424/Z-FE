@@ -58,30 +58,20 @@ const MyProfile = () => {
 
   console.log(followers, followings, '가져온 팔로워와 팔로잉 내역');
 
-  // const handleProfileUpdate = (updatedProfile: Partial<Profile>) => {
-  //   setProfile((prev) => {
-  //     const newProfile = { ...prev, ...updatedProfile };
-  //     if (updatedProfile.handle) {
-  //       newProfile.tag = createTagFromHandle(updatedProfile.handle);
-  //     }
-  //     return newProfile;
-  //   });
-  // };
-
   return (
     <div className="w-full max-w-2xl mx-auto bg-white h-screen overflow-y-auto">
       <FollowingListModal
         isOpen={isFollowingModalOpen}
         onClose={() => setIsFollowingModalOpen(false)}
         followingCount={followings.length}
-        followingUsers={[]}
+        followingUsers={followings}
       />
 
       <FollowerListModal
         isOpen={isFollowerModalOpen}
         onClose={() => setIsFollowerModalOpen(false)}
         followerCount={followers.length}
-        tag={user?.tag || ''}
+        followerUsers={followers}
       />
 
       <div className="border-b p-4 flex items-center justify-between">

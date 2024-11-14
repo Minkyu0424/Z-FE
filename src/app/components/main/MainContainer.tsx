@@ -10,7 +10,6 @@ import MainUpload from './MainUpload';
 const MainContainer = () => {
   const [postDatas, setPostDatas] = useState<PostDetailTypes[] | null>(null);
   const { user } = useUserStore();
-  console.log(postDatas, '데이터');
 
   const fetchPostDetail = useCallback(async () => {
     try {

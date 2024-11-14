@@ -2,6 +2,7 @@
 
 import { commentIcon, deleteIcon, dotIcon, pencilIcon, postLikeIconSM, repostIcon } from '@/app/constants/iconPath';
 import { useModal } from '@/app/hooks/useModal';
+import { useUserStore } from '@/app/store/store';
 import { formatDate } from '@/app/utils/date';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -20,7 +21,7 @@ const MainPost = ({ post, onNewPost }: MainPostProps) => {
   const { isOpen: isOpenEdit, openModal: openEdit, closeModal: closeEdit } = useModal(false);
   const { isOpen: isOpenDel, openModal: openDel, closeModal: closeDel } = useModal(false);
   const { isOpen: isOpenRe, openModal: openRe, closeModal: closeRe } = useModal(false);
-
+  const { user } = useUserStore();
   return (
     <div className="flex px-3 w-full border-b border-b-main-2 pb-2.5">
       {isOpenEdit && <PostEditModal postId={post.id} closeModal={closeEdit} onNewPost={onNewPost} />}
@@ -37,10 +38,12 @@ const MainPost = ({ post, onNewPost }: MainPostProps) => {
             <Icons name={dotIcon} />
             <p>{formatDate(post.createdAt)}</p>
           </div>
-          <div className="flex gap-x-2">
-            <Icons name={pencilIcon} className="cursor-pointer" onClick={openEdit} />
-            <Icons name={deleteIcon} className="cursor-pointer" onClick={openDel} />
-          </div>
+          {user?.tag === post.authorTag && (
+            <div className="flex gap-x-2">
+              <Icons name={pencilIcon} className="cursor-pointer" onClick={openEdit} />
+              <Icons name={deleteIcon} className="cursor-pointer" onClick={openDel} />
+            </div>
+          )}
         </div>
         <Link href={`/post/${post.id}`} className="cursor-pointer">
           <div className="w-full flex-wrap">{post.content}</div>
@@ -65,7 +68,6 @@ const MainPost = ({ post, onNewPost }: MainPostProps) => {
           <div className="flex gap-x-1 items-center cursor-pointer">
             <Icons name={commentIcon} />
             <p>{0}</p>
-
           </div>
         </div>
       </div>
