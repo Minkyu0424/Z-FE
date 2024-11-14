@@ -171,3 +171,10 @@ export const imageIconBlack = {
   height: 22,
   fill: 'black',
 };
+
+export const logoutIcon = {
+  path: 'M6.66667 6.66667H16V4H6.66667C5.2 4 4 5.2 4 6.66667V25.3333C4 26.8 5.2 28 6.66667 28H16V25.3333H6.66667V6.66667ZM28 16L22.6667 10.6667V14.6667H12V17.3333H22.6667V21.3333L28 16Z',
+  width: 32,
+  height: 32,
+  fill: '#7C7C7C',
+};

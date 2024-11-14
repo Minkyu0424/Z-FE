@@ -6,7 +6,7 @@ import Image from 'next/image';
 const welcome = () => {
   return (
     <div className="flex justify-center items-center bg-white w-[480px]">
-      <WelcomeSignup nickname={'일단하드코딩'} />
+      <WelcomeSignup />
     </div>
   );
 };

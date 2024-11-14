@@ -15,7 +15,7 @@ interface PostTypes {
   totalComment: number;
   files: string[];
 }
-export interface Follower {
+interface Follower {
   id: string;
   name: string;
   username: string;
@@ -23,3 +23,11 @@ export interface Follower {
   isFollowing: boolean;
   profile: string;
 }
+interface SearchUserTypes {
+  birthDate: string;
+  tag: string;
+  nickname: string;
+  introduction: string | null;
+  profilePicture: string | null;
+}
+

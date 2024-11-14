@@ -31,6 +31,7 @@ export const useImageUpload = () => {
 
   return {
     files,
+    setFiles,
     fileInputRef,
     handleImageChange,
     handleIconClick,

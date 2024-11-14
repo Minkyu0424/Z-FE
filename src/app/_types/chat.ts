@@ -11,3 +11,11 @@ interface ChatTypes {
   message: string;
   date: string;
 }
+
+interface Message {
+  id: number;
+  content: string;
+  senderTag: string;
+  receiverTag: string;
+  sentAt: string;
+}

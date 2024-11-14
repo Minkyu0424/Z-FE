@@ -1,5 +1,5 @@
 import { closeIconSmall, ImageIconBig } from '@/app/constants/iconPath';
-import { REPOST_PLACEHOLDER, REPOST_TITLE } from '@/app/constants/post';
+import { EDIT_TITLE, REPOST_PLACEHOLDER } from '@/app/constants/post';
 import { useAutoResize } from '@/app/hooks/useAutoResize';
 import { useImageUpload } from '@/app/hooks/useIamgeUpload';
 import { callGet, callPatch } from '@/app/utils/callApi';
@@ -13,9 +13,10 @@ import Repost from '../post/Repost';
 interface PostEditModalProps {
   postId: string;
   closeModal: () => void;
+  onNewPost?: () => Promise<void>;
 }
 
-const PostEditModal = ({ postId, closeModal }: PostEditModalProps) => {
+const PostEditModal = ({ postId, closeModal, onNewPost }: PostEditModalProps) => {
   const { files, fileInputRef, handleImageChange, handleIconClick, handleDeleteImage } = useImageUpload();
   const { contentInputRef, handleResize } = useAutoResize();
   const [postData, setPostData] = useState<PostDetailTypes | null>(null);
@@ -56,7 +57,7 @@ const PostEditModal = ({ postId, closeModal }: PostEditModalProps) => {
     });
 
     await callPatch(`/api/post/?id=${postId}&tag=${postData?.authorTag}`, formData);
-
+    onNewPost && onNewPost();
     closeModal();
 
     if (contentInputRef.current) {
@@ -70,7 +71,7 @@ const PostEditModal = ({ postId, closeModal }: PostEditModalProps) => {
         <div className="flex flex-col">
           <div className="flex gap-4 items-center">
             <Icons name={closeIconSmall} onClick={closeModal} className="cursor-pointer" />
-            <p className="font-semibold">{REPOST_TITLE}</p>
+            <p className="font-semibold">{EDIT_TITLE}</p>
           </div>
           <div className="flex flex-col overflow-y-auto h-[400px]">
             <div className="w-full flex py-3">
@@ -87,7 +88,7 @@ const PostEditModal = ({ postId, closeModal }: PostEditModalProps) => {
             </div>
             <input type="file" accept="image/*" onChange={handleImageChange} ref={fileInputRef} className="hidden" />
             {files.length !== 0 && <MainImages uploads={files} handleDeleteImage={handleDeleteImage} />}
-            {postData && postData.childPosts.length !== 0 && <Repost post={postData} isModal={false} />}
+            {postData?.quotePost && <Repost post={postData.quotePost} isModal={false} />}
           </div>
         </div>
         <div className="w-full flex justify-between pt-3 border-white border-t">

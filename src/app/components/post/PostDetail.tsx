@@ -1,7 +1,16 @@
 'use client';
 
-import { backIcon, commentIcon, deleteIcon, dotIcon, pencilIcon, repostIcon } from '@/app/constants/iconPath';
+import {
+  backIcon,
+  commentIcon,
+  deleteIcon,
+  dotIcon,
+  pencilIcon,
+  postLikeIcon,
+  repostIcon,
+} from '@/app/constants/iconPath';
 import { useModal } from '@/app/hooks/useModal';
+import { useUserStore } from '@/app/store/store';
 import { callGet } from '@/app/utils/callApi';
 import { formatDate } from '@/app/utils/date';
 import Image from 'next/image';
@@ -10,6 +19,7 @@ import { useEffect, useState } from 'react';
 import Icons from '../common/ui/Icons';
 import PostDeleteModal from '../edit/PostDeleteModal';
 import PostEditModal from '../edit/PostEditModal';
+import Repost from './Repost';
 import RepostModal from './RepostModal';
 
 interface PostDetailProps {
@@ -22,6 +32,7 @@ const PostDetail = ({ postId }: PostDetailProps) => {
   const { isOpen: isOpenDel, openModal: openDel, closeModal: closeDel } = useModal(false);
   const { isOpen: isOpenRepost, openModal: openRepost, closeModal: closeRepost } = useModal(false);
   const [postData, setPostData] = useState<PostDetailTypes | null>(null);
+  const { user } = useUserStore();
 
   useEffect(() => {
     const fetchPostDetail = async () => {
@@ -54,11 +65,12 @@ const PostDetail = ({ postId }: PostDetailProps) => {
             <p className="text-xs text-main-1">@{postData?.authorTag || 'leetsBoy'}</p>
           </div>
         </div>
-        {/* {postData?.authorTag===user.authorTag && } */}
-        <div className="flex gap-x-2 pt-1">
-          <Icons name={pencilIcon} className="cursor-pointer" onClick={openEdit} />
-          <Icons name={deleteIcon} className="cursor-pointer" onClick={openDel} />
-        </div>
+        {postData?.authorTag === user?.tag && (
+          <div className="flex gap-x-2 pt-1">
+            <Icons name={pencilIcon} className="cursor-pointer" onClick={openEdit} />
+            <Icons name={deleteIcon} className="cursor-pointer" onClick={openDel} />
+          </div>
+        )}
       </div>
       <div className="w-full flex flex-col gap-y-2 px-2.5 text-[14px] pt-2">
         <div className="w-full flex-wrap">{postData?.content || '게시물을 받아오지 못했습니다.'}</div>
@@ -70,23 +82,21 @@ const PostDetail = ({ postId }: PostDetailProps) => {
           </div>
         ))}
       </div>
+      {postData?.quotePost && <Repost post={postData.quotePost} isModal={false} />}
       <div className="flex text-sm items-center gap-2 text-main-1 pl-3">
-        <p>{formatDate(postData?.createdAt)}</p>
+        <p>{formatDate(postData?.createdAt || '2024.11.11')}</p>
         <Icons name={dotIcon} />
         <p className="font-semibold">24M View</p>
       </div>
       <div className="flex gap-x-5 border-y border-main-2 py-2 text-sm font-medium mt-3 pl-2.5">
-        {/* <div className="flex gap-x-1 items-center cursor-pointer">
+        <div className="flex gap-x-1 items-center cursor-pointer">
           <Icons name={postLikeIcon} />
-          <p>{postData.totalLikes}</p>
-        </div> */}
+        </div>
         <div className="flex gap-x-1 items-center cursor-pointer">
           <Icons name={repostIcon} onClick={openRepost} />
-          {/* <p>{postData.totalLikes}</p> */}
         </div>
         <div className="flex gap-x-1 items-center cursor-pointer">
           <Icons name={commentIcon} />
-          {/* <p>{postData.totalComment}</p> */}
         </div>
       </div>
     </div>

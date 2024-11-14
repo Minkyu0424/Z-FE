@@ -2,6 +2,7 @@
 
 import { closeIconSmall, ImageIconBig } from '@/app/constants/iconPath';
 import { REPOST_PLACEHOLDER, REPOST_TITLE } from '@/app/constants/post';
+import { callPost } from '@/app/utils/callApi';
 import Image from 'next/image';
 import { useRef, useState } from 'react';
 import Button from '../common/ui/Button';
@@ -12,12 +13,14 @@ import Repost from './Repost';
 interface RepostModalProps {
   post: PostDetailTypes;
   closeModal: () => void;
+  onNewPost?: () => Promise<void>;
 }
 
-const RepostModal = ({ post, closeModal }: RepostModalProps) => {
+const RepostModal = ({ post, closeModal, onNewPost }: RepostModalProps) => {
   const contentInputRef = useRef<HTMLTextAreaElement | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [files, setFiles] = useState<ImageFileTypes[]>([]);
+  console.log(post, '모달로 가져온 데이터');
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -53,6 +56,30 @@ const RepostModal = ({ post, closeModal }: RepostModalProps) => {
     if (contentInputRef.current) {
       contentInputRef.current.value = '';
     }
+    const formData = new FormData();
+
+    const postRequestDTO = JSON.stringify({
+      content: textContent || '',
+      parentPostId: null,
+      quotePostId: post.id,
+    });
+
+    formData.append('postRequestDTO', new Blob([postRequestDTO], { type: 'application/json' }));
+
+    files.forEach((file, index) => {
+      formData.append(`images`, file.file);
+    });
+
+    const res = await callPost('/api/post', formData);
+    console.log(res, '응답');
+
+    if (contentInputRef.current) {
+      setFiles([]);
+      contentInputRef.current.value = '';
+    }
+
+    closeModal();
+    onNewPost && onNewPost();
   };
 
   return (
@@ -65,8 +92,8 @@ const RepostModal = ({ post, closeModal }: RepostModalProps) => {
           </div>
           <div className="flex flex-col overflow-y-auto h-[400px]">
             <div className="w-full flex py-3">
-              <div className="w-8 h-8 relative mt-2">
-                <Image fill src="/mock/profile1.png" alt="프로필" />
+              <div className="w-8 h-8 relative mt-2 rounded-full">
+                <Image fill src="/mock/default.webp" alt="프로필" className="rounded-full" />
               </div>
               <textarea
                 ref={contentInputRef}
@@ -77,7 +104,7 @@ const RepostModal = ({ post, closeModal }: RepostModalProps) => {
             </div>
             <input type="file" accept="image/*" onChange={handleImageChange} ref={fileInputRef} className="hidden" />
             {files.length !== 0 && <MainImages uploads={files} handleDeleteImage={handleDeleteImage} />}
-            <Repost post={post} isModal={false} />
+            {<Repost post={post} isModal={true} />}
           </div>
         </div>
         <div className="w-full flex justify-between pt-3 border-white border-t">
