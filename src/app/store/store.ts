@@ -16,7 +16,7 @@ export const useUserStore = create<UserState>((set) => ({
     set({ isLoading: true });
     try {
       const data = await callGet('/api/user');
-      set({ user: data, isLoading: false, error: null });
+      set({ user: data.data, isLoading: false, error: null });
     } catch (err) {
       set({ error: '유저 정보를 가져오는 데 실패했습니다.', isLoading: false });
     }

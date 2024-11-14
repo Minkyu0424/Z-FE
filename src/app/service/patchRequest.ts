@@ -8,7 +8,7 @@ const patchRequest = async (url: string, req: Request, body: any = null) => {
 
   const headers: HeadersInit = {
     ...(isFormData ? {} : { 'Content-Type': 'application/json' }),
-    ...(token && { Authorization: `Bearer ${token}` }),
+    ...(token && { Cookie: `accessToken=${token}` }),
   };
 
   const response = await fetch(`${SERVER_URL}${url}`, {

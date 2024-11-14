@@ -12,14 +12,14 @@ const deleteRequest = async (url: string, req: Request, bodyData?: object) => {
 
   const response = await fetch(url, {
     method: 'DELETE',
-    headers: { ...commonHeaders, ...(token && { 'access-token': token }) },
+    headers: { ...commonHeaders, ...(token && { Cookie: `accessToken=${token}` }) },
     body: bodyData ? JSON.stringify(bodyData) : undefined,
   });
   return response.json();
 };
 
 export const deletePost = async (id: string, req: Request) => {
-  return deleteRequest(`${SERVER_URL}/api/posts/${id}?currentMemberTag=${'000424'}`, req);
+  return deleteRequest(`${SERVER_URL}/api/posts/${id}`, req);
 };
 
 export const unFollowUser = async (tag: string, req: Request) => {
