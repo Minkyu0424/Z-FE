@@ -16,6 +16,8 @@ const postRequest = async (url: string, req: Request, body: any = null) => {
     headers,
     body: isFormData ? body : JSON.stringify(body),
   });
+  console.log(response);
+
   return response.json();
 };
 

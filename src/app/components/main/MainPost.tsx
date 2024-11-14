@@ -8,6 +8,7 @@ import Link from 'next/link';
 import Icons from '../common/ui/Icons';
 import PostDeleteModal from '../edit/PostDeleteModal';
 import PostEditModal from '../edit/PostEditModal';
+import Repost from '../post/Repost';
 import RepostModal from '../post/RepostModal';
 
 interface MainPostProps {
@@ -19,18 +20,13 @@ const MainPost = ({ post, onNewPost }: MainPostProps) => {
   const { isOpen: isOpenEdit, openModal: openEdit, closeModal: closeEdit } = useModal(false);
   const { isOpen: isOpenDel, openModal: openDel, closeModal: closeDel } = useModal(false);
   const { isOpen: isOpenRe, openModal: openRe, closeModal: closeRe } = useModal(false);
+  console.log(post, '포스트');
 
   return (
     <div className="flex px-3 w-full border-b border-b-main-2 pb-2.5">
       {isOpenEdit && <PostEditModal postId={post.id} closeModal={closeEdit} onNewPost={onNewPost} />}
       {isOpenDel && <PostDeleteModal postId={post.id} closeModal={closeDel} onNewPost={onNewPost} />}
-      {isOpenRe && (
-        <RepostModal
-          post={post}
-          closeModal={closeRe}
-          onNewPost={onNewPost}
-        />
-      )}
+      {isOpenRe && <RepostModal post={post} closeModal={closeRe} onNewPost={onNewPost} />}
       <div className="w-8 h-8 relative rounded-full">
         <Image src={'/mock/default.webp'} alt="프로필" fill className="rounded-full" />
       </div>
@@ -47,7 +43,7 @@ const MainPost = ({ post, onNewPost }: MainPostProps) => {
             <Icons name={deleteIcon} className="cursor-pointer" onClick={openDel} />
           </div>
         </div>
-        <Link href="/post/1" className="cursor-pointer">
+        <Link href={`/post/${post.id}`} className="cursor-pointer">
           <div className="w-full flex-wrap">{post.content}</div>
           <div className="w-full flew-wrap flex gap-2">
             {post.imageUrls.map((file, i) => (
@@ -57,6 +53,7 @@ const MainPost = ({ post, onNewPost }: MainPostProps) => {
             ))}
           </div>
         </Link>
+        {post.quotePost && <Repost post={post.quotePost} isModal={false} />}
         <div className="flex pl-2.5 gap-x-5 text-xs">
           <div className="flex gap-x-1 items-center cursor-pointer">
             <Icons name={postLikeIconSM} />

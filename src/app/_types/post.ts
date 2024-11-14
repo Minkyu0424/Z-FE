@@ -23,11 +23,23 @@ interface PostDetailTypes {
   content: string;
   imageUrls: string[];
   parentPostId: number | null;
-  quotePost: number | null;
-  childPosts: string[];
+  quotePost: QuotePostTypes;
+  childPosts: PostDetailTypes[];
   createdAt: string;
 }
 
 interface UserTagTypes {
   tag: string;
+}
+
+interface QuotePostTypes {
+  id: number;
+  authorNickname: string;
+  authorTag: string;
+  content: string;
+  imageUrls: string[];
+  parentPostId?: number | null;
+  quotePost?: QuotePostTypes;
+  childPosts?: PostDetailTypes[];
+  createdAt?: string;
 }

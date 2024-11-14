@@ -13,7 +13,7 @@ import Repost from '../post/Repost';
 interface PostEditModalProps {
   postId: string;
   closeModal: () => void;
-  onNewPost: () => Promise<void>;
+  onNewPost?: () => Promise<void>;
 }
 
 const PostEditModal = ({ postId, closeModal, onNewPost }: PostEditModalProps) => {
@@ -57,7 +57,7 @@ const PostEditModal = ({ postId, closeModal, onNewPost }: PostEditModalProps) =>
     });
 
     await callPatch(`/api/post/?id=${postId}&tag=${postData?.authorTag}`, formData);
-    onNewPost();
+    onNewPost && onNewPost();
     closeModal();
 
     if (contentInputRef.current) {
@@ -88,7 +88,7 @@ const PostEditModal = ({ postId, closeModal, onNewPost }: PostEditModalProps) =>
             </div>
             <input type="file" accept="image/*" onChange={handleImageChange} ref={fileInputRef} className="hidden" />
             {files.length !== 0 && <MainImages uploads={files} handleDeleteImage={handleDeleteImage} />}
-            {postData && postData.childPosts.length !== 0 && <Repost post={postData} isModal={false} />}
+            {postData?.quotePost && <Repost post={postData.quotePost} isModal={false} />}
           </div>
         </div>
         <div className="w-full flex justify-between pt-3 border-white border-t">

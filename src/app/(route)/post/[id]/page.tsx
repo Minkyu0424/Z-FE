@@ -15,7 +15,7 @@ export default async function PostDetailPage({ params }: Props) {
       <SideBar />
       <div className="flex-1 flex flex-col h-screen gap-y-5 overflow-y-auto">
         <PostDetail postId={id} />
-        <CommentContainer />
+        <CommentContainer postId={id} />
       </div>
     </div>
   );

@@ -21,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className={`${pretendard.variable} min-w-[500px] bg-main-4 font-pretendard`}>
+    <html lang="ko" className={`${pretendard.variable} min-w-[500px] bg-gray-100 font-pretendard`}>
       <UserProvider>
         <body className="w-full h-full flex-center">{children}</body>
       </UserProvider>

@@ -6,13 +6,13 @@ import Button from '../common/ui/Button';
 interface PostDeleteModalProps {
   postId: string;
   closeModal: () => void;
-  onNewPost: () => Promise<void>;
+  onNewPost?: () => Promise<void>;
 }
 
 const PostDeleteModal = ({ postId, closeModal, onNewPost }: PostDeleteModalProps) => {
   const deletePost = async () => {
     await callDelete(`/api/post?id=${postId}`);
-    onNewPost();
+    onNewPost && onNewPost();
     closeModal();
   };
 
