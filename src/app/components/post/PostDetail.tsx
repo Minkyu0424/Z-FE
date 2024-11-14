@@ -19,6 +19,7 @@ import { useEffect, useState } from 'react';
 import Icons from '../common/ui/Icons';
 import PostDeleteModal from '../edit/PostDeleteModal';
 import PostEditModal from '../edit/PostEditModal';
+import Repost from './Repost';
 import RepostModal from './RepostModal';
 
 interface PostDetailProps {
@@ -32,6 +33,7 @@ const PostDetail = ({ postId }: PostDetailProps) => {
   const { isOpen: isOpenRepost, openModal: openRepost, closeModal: closeRepost } = useModal(false);
   const [postData, setPostData] = useState<PostDetailTypes | null>(null);
   const { user } = useUserStore();
+
   useEffect(() => {
     const fetchPostDetail = async () => {
       try {
@@ -80,6 +82,7 @@ const PostDetail = ({ postId }: PostDetailProps) => {
           </div>
         ))}
       </div>
+      {postData?.quotePost && <Repost post={postData.quotePost} isModal={false} />}
       <div className="flex text-sm items-center gap-2 text-main-1 pl-3">
         <p>{formatDate(postData?.createdAt || '2024.11.11')}</p>
         <Icons name={dotIcon} />

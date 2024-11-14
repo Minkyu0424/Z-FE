@@ -13,14 +13,13 @@ import RepostModal from '../post/RepostModal';
 
 interface MainPostProps {
   post: PostDetailTypes;
-  onNewPost: () => Promise<void>;
+  onNewPost?: () => Promise<void>;
 }
 
 const MainPost = ({ post, onNewPost }: MainPostProps) => {
   const { isOpen: isOpenEdit, openModal: openEdit, closeModal: closeEdit } = useModal(false);
   const { isOpen: isOpenDel, openModal: openDel, closeModal: closeDel } = useModal(false);
   const { isOpen: isOpenRe, openModal: openRe, closeModal: closeRe } = useModal(false);
-  console.log(post, '포스트');
 
   return (
     <div className="flex px-3 w-full border-b border-b-main-2 pb-2.5">
@@ -57,12 +56,16 @@ const MainPost = ({ post, onNewPost }: MainPostProps) => {
         <div className="flex pl-2.5 gap-x-5 text-xs">
           <div className="flex gap-x-1 items-center cursor-pointer">
             <Icons name={postLikeIconSM} />
+            <p>{0}</p>
           </div>
           <div className="flex gap-x-1 items-center cursor-pointer" onClick={openRe}>
             <Icons name={repostIcon} />
+            <p>{post.childPosts.length}</p>
           </div>
           <div className="flex gap-x-1 items-center cursor-pointer">
             <Icons name={commentIcon} />
+            <p>{0}</p>
+
           </div>
         </div>
       </div>
