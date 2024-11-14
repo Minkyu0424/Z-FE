@@ -12,7 +12,11 @@ interface FollowingListModalProps {
 
 const FollowingListModal = ({ isOpen, onClose, followingCount, followingUsers }: FollowingListModalProps) => {
   const handleFollow = async (tag: string) => await callPost('api/follow', tag);
-  const handleUnFollow = async (tag: string) => await callDelete(`api/follow?tag${tag}`);
+  const handleUnFollow = async (tag: string) => {
+    console.log(tag, '로 팔로우 해제');
+    await callDelete(`api/follow?tag=${tag}`);
+    onClose();
+  };
 
   if (!isOpen) return null;
   return (
@@ -39,11 +43,7 @@ const FollowingListModal = ({ isOpen, onClose, followingCount, followingUsers }:
                   <div className="flex items-center space-x-3 min-w-0">
                     <div className="w-10 h-10 bg-gray-200 rounded-full flex-shrink-0 overflow-hidden">
                       {user.profilePicture ? (
-                        <img
-                          src={user.profilePicture}
-                          alt='profile'
-                          className="w-full h-full object-cover"
-                        />
+                        <img src={user.profilePicture} alt="profile" className="w-full h-full object-cover" />
                       ) : (
                         <div className="w-full h-full bg-gray-200" />
                       )}
@@ -54,7 +54,7 @@ const FollowingListModal = ({ isOpen, onClose, followingCount, followingUsers }:
                     </div>
                   </div>
                   <button
-                    onClick={() => handleFollow(user.tag)}
+                    onClick={() => handleUnFollow(user.tag)}
                     className="ml-3 px-4 py-1.5 text-sm font-bold rounded-full flex-shrink-0
                       border border-gray-300 hover:border-red-300 hover:text-red-600 
                       hover:bg-red-50 transition-colors"

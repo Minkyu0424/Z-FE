@@ -2,6 +2,7 @@
 
 import { useUserStore } from '@/app/store/store';
 import { callGet } from '@/app/utils/callApi';
+import { getRandomProfileImage } from '@/app/utils/randomProfile';
 import { ArrowLeft, Camera } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -17,9 +18,9 @@ const MyProfile = () => {
   const [postDatas, setPostDatas] = useState<PostDetailTypes[]>([]);
   const [followers, setFollowers] = useState<SearchUserTypes[]>([]);
   const [followings, setFollowings] = useState<SearchUserTypes[]>([]);
-  const { user } = useUserStore();
   const [userData, setUserData] = useState<SearchUserTypes | null>(null);
-
+  const profile = getRandomProfileImage();
+  const { user } = useUserStore();
   const fetchPosts = useCallback(async () => {
     const resData = await callGet(`/api/mainPosts?tag=${user?.tag}`);
     setPostDatas(resData.data);
@@ -36,7 +37,7 @@ const MyProfile = () => {
   }, [user]);
 
   const getUser = async () => {
-    const resData = await callGet(`/api/search?tag=${user?.tag}`);
+    const resData = await callGet(`/api/search/me?tag=${user?.tag}`);
     resData.success && setUserData(resData.data);
   };
 
@@ -80,7 +81,7 @@ const MyProfile = () => {
               <button className="absolute inset-0 w-full h-full rounded-full flex items-center justify-center bg-black/40 opacity-0 hover:opacity-100 transition-opacity">
                 <Camera className="w-6 h-6 text-white" />
               </button>
-              <Image src="/mock/default.webp" fill alt="profile" className="rounded-full" />
+              <Image src={profile} fill alt="profile" className="rounded-full" />
             </div>
           </div>
           <div className="flex justify-end -mt-12">

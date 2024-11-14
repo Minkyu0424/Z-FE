@@ -12,7 +12,7 @@ import SearchPeople from './SearchPeople';
 const SearchContainer = () => {
   const [text, setText] = useState('');
   const [searchType, setSearchType] = useState<SearchTypes>('POST');
-  const [userData, setUserData] = useState<SearchUserTypes | null>(null);
+  const [userData, setUserData] = useState<SearchUserTypes[]>([]);
 
   const tagStyle = (tag: SearchTypes) => {
     return searchType === tag ? 'text-black border-b-2 border-black box-border' : 'text-main-1 pb-0.5';
@@ -20,10 +20,8 @@ const SearchContainer = () => {
 
   const searchUser = async () => {
     const resData = await callGet(`/api/search?tag=${text}`);
-    console.log(resData);
-
     if (resData.success) {
-      setUserData(resData.data);
+      setUserData(resData.data.memberInfo);
     }
     setText('');
   };
@@ -54,7 +52,15 @@ const SearchContainer = () => {
           </div>
         ))}
       </div>
-      {userData ? <SearchPeople user={userData} /> : <NoSearch text={NO_RESULT_TEXT} />}
+      {userData && userData.length !== 0 ? (
+        userData.map((user) => (
+          <div className="w-full flex-col flex ">
+            <SearchPeople user={user} setText={setText} />
+          </div>
+        ))
+      ) : (
+        <NoSearch text={NO_RESULT_TEXT} />
+      )}
     </div>
   );
 };

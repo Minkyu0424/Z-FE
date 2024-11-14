@@ -23,5 +23,5 @@ export const deletePost = async (id: string, req: Request) => {
 };
 
 export const unFollowUser = async (tag: string, req: Request) => {
-  return deleteRequest(`${SERVER_URL}/api/follows`, req, { tag });
+  return deleteRequest(`${SERVER_URL}/api/follows`, req, { tag: tag });
 };
