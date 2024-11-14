@@ -1,6 +1,6 @@
 'use client';
 
-import { deleteIcon, dotIcon, pencilIcon } from '@/app/constants/iconPath';
+import { commentIcon, deleteIcon, dotIcon, pencilIcon, postLikeIconSM, repostIcon } from '@/app/constants/iconPath';
 import { useModal } from '@/app/hooks/useModal';
 import { formatDate } from '@/app/utils/date';
 import Image from 'next/image';
@@ -8,6 +8,7 @@ import Link from 'next/link';
 import Icons from '../common/ui/Icons';
 import PostDeleteModal from '../edit/PostDeleteModal';
 import PostEditModal from '../edit/PostEditModal';
+import RepostModal from '../post/RepostModal';
 
 interface MainPostProps {
   post: PostDetailTypes;
@@ -16,11 +17,13 @@ interface MainPostProps {
 const MainPost = ({ post }: MainPostProps) => {
   const { isOpen: isOpenEdit, openModal: openEdit, closeModal: closeEdit } = useModal(false);
   const { isOpen: isOpenDel, openModal: openDel, closeModal: closeDel } = useModal(false);
+  const { isOpen: isOpenRe, openModal: openRe, closeModal: closeRe } = useModal(false);
 
   return (
     <div className="flex px-3 w-full border-b border-b-main-2 pb-2.5">
       {isOpenEdit && <PostEditModal postId={post.id} closeModal={closeEdit} />}
-      {isOpenDel && <PostDeleteModal postId={'1'} closeModal={closeDel} />}
+      {isOpenDel && <PostDeleteModal postId={post.id} closeModal={closeDel} />}
+      {isOpenRe && <RepostModal post={post} closeModal={closeRe} />}
       <div className="w-8 h-8 relative rounded-full">
         <Image src={'/mock/default.webp'} alt="프로필" fill className="rounded-full" />
       </div>
@@ -47,20 +50,17 @@ const MainPost = ({ post }: MainPostProps) => {
             ))}
           </div>
         </Link>
-        {/* <div className="flex pl-2.5 gap-x-5 text-xs">
+        <div className="flex pl-2.5 gap-x-5 text-xs">
           <div className="flex gap-x-1 items-center cursor-pointer">
             <Icons name={postLikeIconSM} />
-            <p>{post.totalLikes}</p>
           </div>
-          <div className="flex gap-x-1 items-center cursor-pointer">
+          <div className="flex gap-x-1 items-center cursor-pointer" onClick={openRe}>
             <Icons name={repostIcon} />
-            <p>{post.totalLikes}</p>
           </div>
           <div className="flex gap-x-1 items-center cursor-pointer">
             <Icons name={commentIcon} />
-            <p>{post.totalComment}</p>
           </div>
-        </div> */}
+        </div>
       </div>
     </div>
   );

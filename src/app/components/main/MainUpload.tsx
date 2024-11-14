@@ -10,7 +10,11 @@ import Button from '../common/ui/Button';
 import Icons from '../common/ui/Icons';
 import MainImages from './MainImages';
 
-const MainUpload = () => {
+interface MainUploadProps {
+  onNewPost: () => Promise<void>;
+}
+
+const MainUpload = ({ onNewPost }: MainUploadProps) => {
   const { files, fileInputRef, handleImageChange, handleIconClick, handleDeleteImage } = useImageUpload();
   const { contentInputRef, handleResize } = useAutoResize();
 
@@ -39,6 +43,7 @@ const MainUpload = () => {
     if (contentInputRef.current) {
       contentInputRef.current.value = '';
     }
+    onNewPost();
   };
 
   return (

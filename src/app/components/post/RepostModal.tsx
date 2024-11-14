@@ -65,8 +65,8 @@ const RepostModal = ({ post, closeModal }: RepostModalProps) => {
           </div>
           <div className="flex flex-col overflow-y-auto h-[400px]">
             <div className="w-full flex py-3">
-              <div className="w-8 h-8 relative mt-2">
-                <Image fill src="/mock/profile1.png" alt="프로필" />
+              <div className="w-8 h-8 relative mt-2 rounded-full">
+                <Image fill src="/mock/default.webp" alt="프로필" className="rounded-full" />
               </div>
               <textarea
                 ref={contentInputRef}
@@ -77,7 +77,7 @@ const RepostModal = ({ post, closeModal }: RepostModalProps) => {
             </div>
             <input type="file" accept="image/*" onChange={handleImageChange} ref={fileInputRef} className="hidden" />
             {files.length !== 0 && <MainImages uploads={files} handleDeleteImage={handleDeleteImage} />}
-            <Repost post={post} isModal={false} />
+            <Repost post={post} isModal={true} />
           </div>
         </div>
         <div className="w-full flex justify-between pt-3 border-white border-t">

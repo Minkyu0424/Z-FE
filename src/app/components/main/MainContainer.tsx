@@ -2,7 +2,7 @@
 
 import { useUserStore } from '@/app/store/store';
 import { callGet } from '@/app/utils/callApi';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import MainNoPost from './MainNoPost';
 import MainPost from './MainPost';
 import MainUpload from './MainUpload';
@@ -11,21 +11,22 @@ const MainContainer = () => {
   const [postDatas, setPostDatas] = useState<PostDetailTypes[] | null>(null);
   const { user } = useUserStore();
 
-  useEffect(() => {
-    const fetchPostDetail = async () => {
-      try {
-        const resData = await callGet(`/api/mainPosts?tag=${'000424'}`);
-        setPostDatas(resData.data);
-      } catch (error) {
-        console.error('Error fetching post details:', error);
-      }
-    };
-    fetchPostDetail();
+  const fetchPostDetail = useCallback(async () => {
+    try {
+      const resData = await callGet(`/api/mainPosts?tag=${'000424'}`);
+      setPostDatas(resData.data);
+    } catch (error) {
+      console.error('Error fetching post details:', error);
+    }
   }, []);
+
+  useEffect(() => {
+    fetchPostDetail();
+  }, [fetchPostDetail]);
 
   return (
     <div className="flex-1 pt-6 flex-col-center h-screen w-full overflow-y-auto">
-      <MainUpload />
+      <MainUpload onNewPost={fetchPostDetail}/>
       {postDatas?.length === 0 ? (
         <MainNoPost />
       ) : (

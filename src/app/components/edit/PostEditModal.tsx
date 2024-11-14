@@ -1,5 +1,5 @@
 import { closeIconSmall, ImageIconBig } from '@/app/constants/iconPath';
-import { REPOST_PLACEHOLDER, REPOST_TITLE } from '@/app/constants/post';
+import { EDIT_TITLE, REPOST_PLACEHOLDER, REPOST_TITLE } from '@/app/constants/post';
 import { useAutoResize } from '@/app/hooks/useAutoResize';
 import { useImageUpload } from '@/app/hooks/useIamgeUpload';
 import { callGet, callPatch } from '@/app/utils/callApi';
@@ -70,7 +70,7 @@ const PostEditModal = ({ postId, closeModal }: PostEditModalProps) => {
         <div className="flex flex-col">
           <div className="flex gap-4 items-center">
             <Icons name={closeIconSmall} onClick={closeModal} className="cursor-pointer" />
-            <p className="font-semibold">{REPOST_TITLE}</p>
+            <p className="font-semibold">{EDIT_TITLE}</p>
           </div>
           <div className="flex flex-col overflow-y-auto h-[400px]">
             <div className="w-full flex py-3">
